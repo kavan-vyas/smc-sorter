@@ -316,9 +316,197 @@ class WebPageToPDFConverter:
             print(f"Error creating simple PDF {output_path}: {e}")
             return False
     
+    def create_combined_pdf_with_gifs(self, gif_pairs: List[Tuple[str, str, str]], output_path: str) -> bool:
+        """
+        Create a single PDF with all question-answer pairs using ReportLab.
+        
+        Args:
+            gif_pairs: List of (question_id, question_path, answer_path) tuples
+            output_path: Output PDF file path
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Create PDF document
+            doc = SimpleDocTemplate(
+                output_path,
+                pagesize=A4,
+                rightMargin=self.margin,
+                leftMargin=self.margin,
+                topMargin=self.margin,
+                bottomMargin=self.margin
+            )
+            
+            # Create styles
+            styles = getSampleStyleSheet()
+            title_style = ParagraphStyle(
+                'CustomTitle',
+                parent=styles['Heading1'],
+                fontSize=24,
+                spaceAfter=30,
+                alignment=1,  # Center alignment
+                textColor=colors.HexColor('#333333')
+            )
+            
+            section_style = ParagraphStyle(
+                'CustomSection',
+                parent=styles['Heading2'],
+                fontSize=18,
+                spaceAfter=20,
+                spaceBefore=30,
+                alignment=1,  # Center alignment
+                textColor=colors.HexColor('#555555')
+            )
+            
+            id_style = ParagraphStyle(
+                'IDStyle',
+                parent=styles['Normal'],
+                fontSize=14,
+                spaceAfter=20,
+                alignment=1,  # Center alignment
+                textColor=colors.HexColor('#666666')
+            )
+            
+            # Build content
+            content = []
+            
+            for i, (question_id, question_path, answer_path) in enumerate(gif_pairs):
+                print(f"  Adding question {question_id} to combined PDF...")
+                
+                # Title and question ID
+                content.append(Paragraph("Question", title_style))
+                content.append(Paragraph(f"Question ID: {question_id}", id_style))
+                
+                # Question image
+                try:
+                    q_width, q_height = self.get_image_dimensions(question_path)
+                    question_img = Image(question_path, width=q_width, height=q_height)
+                    question_img.hAlign = 'CENTER'
+                    content.append(question_img)
+                except Exception as e:
+                    print(f"    Error adding question image: {e}")
+                    content.append(Paragraph(f"[Question image could not be loaded: {question_path}]", styles['Normal']))
+                
+                # Spacer between sections
+                content.append(Spacer(1, 40))
+                
+                # Separator line
+                content.append(Paragraph('<para align="center">─────────────────────────────────</para>', styles['Normal']))
+                
+                # Answer section
+                content.append(Paragraph("Answer", section_style))
+                
+                # Answer image
+                try:
+                    a_width, a_height = self.get_image_dimensions(answer_path)
+                    answer_img = Image(answer_path, width=a_width, height=a_height)
+                    answer_img.hAlign = 'CENTER'
+                    content.append(answer_img)
+                except Exception as e:
+                    print(f"    Error adding answer image: {e}")
+                    content.append(Paragraph(f"[Answer image could not be loaded: {answer_path}]", styles['Normal']))
+                
+                # Add page break between questions (except for the last one)
+                if i < len(gif_pairs) - 1:
+                    content.append(PageBreak())
+            
+            # Build PDF
+            doc.build(content)
+            print(f"✓ Created combined PDF: {output_path}")
+            return True
+            
+        except Exception as e:
+            print(f"Error creating combined PDF {output_path}: {e}")
+            return False
+    
+    def create_combined_simple_pdf(self, gif_pairs: List[Tuple[str, str, str]], output_path: str) -> bool:
+        """
+        Create a single PDF with all question-answer pairs using direct canvas approach.
+        
+        Args:
+            gif_pairs: List of (question_id, question_path, answer_path) tuples
+            output_path: Output PDF file path
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            c = canvas.Canvas(output_path, pagesize=A4)
+            width, height = A4
+            
+            for i, (question_id, question_path, answer_path) in enumerate(gif_pairs):
+                print(f"  Adding question {question_id} to combined PDF...")
+                
+                # Title
+                c.setFont("Helvetica-Bold", 24)
+                c.drawCentredText(width/2, height - 80, "Question")
+                
+                # Question ID
+                c.setFont("Helvetica", 14)
+                c.drawCentredText(width/2, height - 110, f"Question ID: {question_id}")
+                
+                # Question image
+                try:
+                    q_width, q_height = self.get_image_dimensions(
+                        question_path, 
+                        max_width=width - 4*cm,
+                        max_height=(height - 200) / 2.2
+                    )
+                    
+                    q_x = (width - q_width) / 2
+                    q_y = height - 150 - q_height
+                    
+                    c.drawImage(question_path, q_x, q_y, width=q_width, height=q_height)
+                    
+                    # Answer section - positioned below question image
+                    answer_y_start = q_y - 80
+                    
+                except Exception as e:
+                    print(f"    Error with question image: {e}")
+                    answer_y_start = height / 2
+                
+                # Separator line
+                line_y = answer_y_start + 30
+                c.line(width/2 - 100, line_y, width/2 + 100, line_y)
+                
+                # Answer title
+                c.setFont("Helvetica-Bold", 18)
+                c.drawCentredText(width/2, answer_y_start, "Answer")
+                
+                # Answer image
+                try:
+                    a_width, a_height = self.get_image_dimensions(
+                        answer_path,
+                        max_width=width - 4*cm,
+                        max_height=answer_y_start - 100
+                    )
+                    
+                    a_x = (width - a_width) / 2
+                    a_y = answer_y_start - 40 - a_height
+                    
+                    c.drawImage(answer_path, a_x, a_y, width=a_width, height=a_height)
+                    
+                except Exception as e:
+                    print(f"    Error with answer image: {e}")
+                    c.setFont("Helvetica", 12)
+                    c.drawCentredText(width/2, answer_y_start - 60, f"[Answer image error: {str(e)}]")
+                
+                # Add new page for next question (except for the last one)
+                if i < len(gif_pairs) - 1:
+                    c.showPage()
+            
+            c.save()
+            print(f"✓ Created combined PDF: {output_path}")
+            return True
+            
+        except Exception as e:
+            print(f"Error creating combined simple PDF {output_path}: {e}")
+            return False
+    
     def process_all_questions(self, use_simple_mode: bool = False) -> None:
         """
-        Process all question-answer pairs and create PDFs.
+        Process all question-answer pairs and create a single combined PDF.
         
         Args:
             use_simple_mode: If True, use simple canvas-based PDF creation
@@ -329,30 +517,30 @@ class WebPageToPDFConverter:
             print("No question-answer pairs found!")
             return
             
-        print(f"Found {len(gif_pairs)} question-answer pairs")
-        successful_conversions = 0
+        # Sort by question ID numerically
+        gif_pairs.sort(key=lambda x: int(x[0]) if x[0].isdigit() else float('inf'))
         
-        for question_id, question_path, answer_path in gif_pairs:
-            print(f"\nProcessing question {question_id}...")
-            
-            output_path = self.output_folder / f"question_{question_id}.pdf"
-            
-            # Try advanced mode first, fall back to simple mode
-            if use_simple_mode:
-                success = self.create_simple_pdf(question_path, answer_path, question_id, str(output_path))
-            else:
-                success = self.create_pdf_with_gifs(question_path, answer_path, question_id, str(output_path))
-                if not success:
-                    print("  Retrying with simple mode...")
-                    success = self.create_simple_pdf(question_path, answer_path, question_id, str(output_path))
-            
-            if success:
-                successful_conversions += 1
-                
-        print(f"\n{'='*50}")
-        print(f"Conversion complete!")
-        print(f"Successfully created {successful_conversions}/{len(gif_pairs)} PDFs")
-        print(f"Output folder: {self.output_folder.absolute()}")
+        print(f"Found {len(gif_pairs)} question-answer pairs")
+        print("Creating single combined PDF with all questions in order...")
+        
+        output_path = self.output_folder / "all_questions_combined.pdf"
+        
+        if use_simple_mode:
+            success = self.create_combined_simple_pdf(gif_pairs, str(output_path))
+        else:
+            success = self.create_combined_pdf_with_gifs(gif_pairs, str(output_path))
+            if not success:
+                print("  Retrying with simple mode...")
+                success = self.create_combined_simple_pdf(gif_pairs, str(output_path))
+        
+        if success:
+            print(f"\n{'='*50}")
+            print(f"Conversion complete!")
+            print(f"Successfully created combined PDF with {len(gif_pairs)} questions")
+            print(f"Output file: {output_path.absolute()}")
+        else:
+            print(f"\n{'='*50}")
+            print("Failed to create combined PDF")
     
     def process_single_question(self, question_id: str, use_simple_mode: bool = False) -> bool:
         """
