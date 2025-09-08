@@ -1,15 +1,5 @@
 # Web Page to PDF Converter Setup
 
-## Requirements
-
-Create a `requirements.txt` file with the following content:
-
-```
-weasyprint>=60.0
-pillow>=9.0.0
-beautifulsoup4>=4.11.0
-requests>=2.28.0
-```
 
 ## Installation
 
