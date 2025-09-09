@@ -89,7 +89,7 @@ python main.py questions_folder 1234
 ## Troubleshooting
 
 1. **Installation much simpler now:**
-   - Only need: `pip install reportlab pillow`
+   - Only need: `pip3 install reportlab pillow`
    - No system dependencies required!
 
 2. **If images don't appear correctly:**
