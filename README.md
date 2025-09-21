@@ -110,7 +110,7 @@ python main.py questions_folder 1234
 
 ## OneNote Integration
 
-1. Open OneNote
+1. Open Microsoft OneNote
 2. Navigate to the page where you want to add the PDF
 3. Go to Insert → File Attachment
 4. Select your generated PDF file
