@@ -1,0 +1,3193 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO,RE]{\leftmark}
+
+% Custom theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{formula}{Formula}[chapter]
+
+% Custom boxes
+\newtcolorbox{keyformula}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=Key Formula
+}
+
+\newtcolorbox{intuition}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=Intuitive Understanding
+}
+
+\newtcolorbox{solution}{
+    colback=yellow!5!white,
+    colframe=orange!75!black,
+    title=Solution
+}
+
+\title{\Huge\textbf{Essential Calculus Skills Practice Workbook}\\\Large Complete Explanations and Solutions}
+\author{Comprehensive Study Guide}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+Welcome to the Essential Calculus Skills Practice Workbook! This comprehensive guide is designed to take you from basic calculus concepts to advanced techniques through detailed explanations, intuitive examples, and extensive practice problems.
+
+Each chapter follows a structured approach:
+\begin{itemize}
+    \item \textbf{Conceptual Introduction}: Understanding the "why" behind each topic
+    \item \textbf{Intuitive Explanations}: Real-world analogies and visual thinking
+    \item \textbf{Mathematical Formulation}: Precise definitions and formulas
+    \item \textbf{Worked Examples}: Step-by-step solutions with detailed reasoning
+    \item \textbf{Practice Problems}: Five problems per section with complete solutions
+\end{itemize}
+
+This workbook assumes only basic mathematical knowledge and builds systematically to advanced calculus concepts.
+
+\chapter{Derivatives of Polynomials}
+
+\section{Understanding Derivatives}
+
+\begin{intuition}
+Think of a derivative as measuring "how fast something is changing." If you're driving a car, your position changes over time. The derivative of your position with respect to time is your velocity - it tells you how quickly your position is changing at any given moment.
+
+For a graph, the derivative at any point is the slope of the tangent line at that point. Imagine rolling a ball down a curved hill - the derivative tells you how steep the hill is at each point.
+\end{intuition}
+
+\subsection{The Power Rule}
+
+The most fundamental rule for finding derivatives of polynomials is the Power Rule.
+
+\begin{keyformula}
+If $f(x) = x^n$ where $n$ is any real number, then:
+$$f'(x) = nx^{n-1}$$
+
+More generally, if $f(x) = ax^n$ where $a$ is a constant, then:
+$$f'(x) = anx^{n-1}$$
+\end{keyformula}
+
+\begin{example}
+Let's find the derivative of $f(x) = x^3$.
+
+Using the power rule with $n = 3$:
+$$f'(x) = 3x^{3-1} = 3x^2$$
+
+This means that at any point $x$, the slope of the tangent line to $y = x^3$ is $3x^2$.
+\end{example}
+
+\subsection{Derivatives of Constants}
+
+\begin{keyformula}
+The derivative of any constant is zero:
+$$\frac{d}{dx}[c] = 0$$
+
+This makes intuitive sense - a constant doesn't change, so its rate of change is zero.
+\end{keyformula}
+
+\subsection{The Sum Rule}
+
+\begin{keyformula}
+The derivative of a sum is the sum of the derivatives:
+$$\frac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$$
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $f(x) = 3x^4 + 2x^2 - 7x + 5$.
+
+Applying the sum rule and power rule:
+\begin{align}
+f'(x) &= \frac{d}{dx}[3x^4] + \frac{d}{dx}[2x^2] + \frac{d}{dx}[-7x] + \frac{d}{dx}[5]\\
+&= 3 \cdot 4x^3 + 2 \cdot 2x^1 + (-7) \cdot 1x^0 + 0\\
+&= 12x^3 + 4x - 7
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 1}
+
+\textbf{Problem 1.1:} Find the derivative of $f(x) = 5x^3 - 2x^2 + 8x - 3$.
+
+\textbf{Problem 1.2:} Find $\frac{dy}{dx}$ if $y = 4x^5 + 3x^4 - x^2 + 7$.
+
+\textbf{Problem 1.3:} Find the derivative of $g(t) = 2t^6 - 5t^3 + 10t - 1$.
+
+\textbf{Problem 1.4:} If $h(x) = x^4 - 3x^3 + 2x - 5$, find $h'(x)$.
+
+\textbf{Problem 1.5:} Find the derivative of $f(x) = 7x^2 - 4x + 9$.
+
+\chapter{The Chain Rule, Product Rule, and Quotient Rule}
+
+\section{The Chain Rule}
+
+\begin{intuition}
+The chain rule handles "functions within functions" - composite functions. Think of it like a gear system: if gear A turns gear B, and gear B turns gear C, then the rate at which gear C turns depends on both how fast gear A turns gear B, and how fast gear B turns gear C.
+
+If you have $f(g(x))$, the rate of change depends on how fast the "outer" function $f$ changes with respect to its input, multiplied by how fast the "inner" function $g$ changes with respect to $x$.
+\end{intuition}
+
+\begin{keyformula}
+If $y = f(g(x))$, then:
+$$\frac{dy}{dx} = f'(g(x)) \cdot g'(x)$$
+
+Or in Leibniz notation, if $y = f(u)$ and $u = g(x)$:
+$$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $y = (3x^2 + 2x)^5$.
+
+Let $u = 3x^2 + 2x$, so $y = u^5$.
+
+Then:
+\begin{align}
+\frac{dy}{du} &= 5u^4\\
+\frac{du}{dx} &= 6x + 2\\
+\frac{dy}{dx} &= \frac{dy}{du} \cdot \frac{du}{dx} = 5u^4 \cdot (6x + 2)\\
+&= 5(3x^2 + 2x)^4 \cdot (6x + 2)
+\end{align}
+\end{example}
+
+\section{The Product Rule}
+
+\begin{intuition}
+When you have two functions multiplied together, both can be changing. The product rule accounts for both possibilities: the first function changing while the second stays constant, plus the second function changing while the first stays constant.
+
+Think of a rectangle whose length and width are both changing with time. The rate of change of the area depends on how fast the length is changing (times the current width) plus how fast the width is changing (times the current length).
+\end{intuition}
+
+\begin{keyformula}
+If $y = f(x) \cdot g(x)$, then:
+$$y' = f'(x) \cdot g(x) + f(x) \cdot g'(x)$$
+
+In words: "derivative of first times second plus first times derivative of second"
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $y = (2x + 1)(x^3 - 4)$.
+
+Let $f(x) = 2x + 1$ and $g(x) = x^3 - 4$.
+
+Then:
+\begin{align}
+f'(x) &= 2\\
+g'(x) &= 3x^2\\
+y' &= f'(x) \cdot g(x) + f(x) \cdot g'(x)\\
+&= 2(x^3 - 4) + (2x + 1)(3x^2)\\
+&= 2x^3 - 8 + 6x^3 + 3x^2\\
+&= 8x^3 + 3x^2 - 8
+\end{align}
+\end{example}
+
+\section{The Quotient Rule}
+
+\begin{keyformula}
+If $y = \frac{f(x)}{g(x)}$, then:
+$$y' = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{[g(x)]^2}$$
+
+Memory aid: "low dee-high minus high dee-low, over low squared"
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $y = \frac{x^2 + 1}{x - 2}$.
+
+Let $f(x) = x^2 + 1$ and $g(x) = x - 2$.
+
+Then:
+\begin{align}
+f'(x) &= 2x\\
+g'(x) &= 1\\
+y' &= \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{[g(x)]^2}\\
+&= \frac{2x(x - 2) - (x^2 + 1)(1)}{(x - 2)^2}\\
+&= \frac{2x^2 - 4x - x^2 - 1}{(x - 2)^2}\\
+&= \frac{x^2 - 4x - 1}{(x - 2)^2}
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 2}
+
+\textbf{Problem 2.1:} Find the derivative of $y = (4x^2 - 3x + 1)^3$ using the chain rule.
+
+\textbf{Problem 2.2:} Find the derivative of $f(x) = (x + 2)(3x^2 - 1)$ using the product rule.
+
+\textbf{Problem 2.3:} Find the derivative of $g(x) = \frac{2x + 5}{x^2 - 1}$ using the quotient rule.
+
+\textbf{Problem 2.4:} Find $\frac{dy}{dx}$ if $y = x^2(x - 3)^2$.
+
+\textbf{Problem 2.5:} Find the derivative of $h(t) = \frac{t^3}{2t + 1}$.
+
+\chapter{Derivatives of Trigonometric Functions}
+
+\section{Understanding Trigonometric Derivatives}
+
+\begin{intuition}
+Trigonometric functions describe periodic, wave-like behavior. Their derivatives tell us how fast these waves are changing at any point. 
+
+Consider a pendulum swinging back and forth. Its position follows a sine or cosine function. The derivative (velocity) tells us how fast it's moving at each point in its swing. Notice that when the pendulum is at its highest point (maximum displacement), its velocity is zero - it's momentarily stopped before changing direction.
+\end{intuition}
+
+\subsection{Basic Trigonometric Derivatives}
+
+\begin{keyformula}
+The fundamental trigonometric derivatives are:
+\begin{align}
+\frac{d}{dx}[\sin x] &= \cos x\\
+\frac{d}{dx}[\cos x] &= -\sin x\\
+\frac{d}{dx}[\tan x] &= \sec^2 x\\
+\frac{d}{dx}[\sec x] &= \sec x \tan x\\
+\frac{d}{dx}[\csc x] &= -\csc x \cot x\\
+\frac{d}{dx}[\cot x] &= -\csc^2 x
+\end{align}
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $f(x) = 3\sin x + 2\cos x$.
+
+Using the basic derivatives and the constant multiple rule:
+\begin{align}
+f'(x) &= 3 \cdot \frac{d}{dx}[\sin x] + 2 \cdot \frac{d}{dx}[\cos x]\\
+&= 3\cos x + 2(-\sin x)\\
+&= 3\cos x - 2\sin x
+\end{align}
+\end{example}
+
+\subsection{Chain Rule with Trigonometric Functions}
+
+When trigonometric functions have more complex arguments, we use the chain rule.
+
+\begin{example}
+Find the derivative of $y = \sin(3x^2 + 1)$.
+
+Let $u = 3x^2 + 1$, so $y = \sin u$.
+
+Then:
+\begin{align}
+\frac{dy}{du} &= \cos u\\
+\frac{du}{dx} &= 6x\\
+\frac{dy}{dx} &= \cos u \cdot 6x = 6x\cos(3x^2 + 1)
+\end{align}
+\end{example}
+
+\begin{example}
+Find the derivative of $f(x) = \tan(2x - 1)$.
+
+Using the chain rule:
+\begin{align}
+f'(x) &= \sec^2(2x - 1) \cdot \frac{d}{dx}[2x - 1]\\
+&= \sec^2(2x - 1) \cdot 2\\
+&= 2\sec^2(2x - 1)
+\end{align}
+\end{example}
+
+\subsection{Product and Quotient Rules with Trigonometric Functions}
+
+\begin{example}
+Find the derivative of $y = x^2 \sin x$.
+
+Using the product rule with $f(x) = x^2$ and $g(x) = \sin x$:
+\begin{align}
+y' &= f'(x) \cdot g(x) + f(x) \cdot g'(x)\\
+&= 2x \cdot \sin x + x^2 \cdot \cos x\\
+&= 2x\sin x + x^2\cos x
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 3}
+
+\textbf{Problem 3.1:} Find the derivative of $f(x) = 4\sin x - 3\cos x + 2\tan x$.
+
+\textbf{Problem 3.2:} Find $\frac{dy}{dx}$ if $y = \sin(5x + 2)$.
+
+\textbf{Problem 3.3:} Find the derivative of $g(x) = x\cos x$.
+
+\textbf{Problem 3.4:} Find the derivative of $h(t) = \frac{\sin t}{1 + \cos t}$.
+
+\textbf{Problem 3.5:} Find $\frac{d}{dx}[\cos^2 x]$. (Hint: $\cos^2 x = (\cos x)^2$)
+
+\chapter{Derivatives of Exponential Functions}
+
+\section{Understanding Exponential Growth and Decay}
+
+\begin{intuition}
+Exponential functions describe processes where the rate of change is proportional to the current amount. Think of:
+\begin{itemize}
+    \item Population growth: The more people there are, the faster the population grows
+    \item Radioactive decay: The more radioactive material present, the faster it decays
+    \item Compound interest: The more money in your account, the more interest you earn
+\end{itemize}
+
+The remarkable property of exponential functions is that their derivatives are proportional to themselves!
+\end{intuition}
+
+\subsection{The Natural Exponential Function}
+
+\begin{keyformula}
+The most important exponential function is $e^x$, where $e \approx 2.71828...$
+
+$$\frac{d}{dx}[e^x] = e^x$$
+
+This is the only function (up to constant multiples) that is its own derivative!
+
+For exponential functions with other bases:
+$$\frac{d}{dx}[a^x] = a^x \ln a$$
+
+For exponential functions with variable exponents:
+$$\frac{d}{dx}[e^{f(x)}] = e^{f(x)} \cdot f'(x)$$
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $f(x) = 3e^x + 2^x$.
+
+\begin{align}
+f'(x) &= 3 \cdot \frac{d}{dx}[e^x] + \frac{d}{dx}[2^x]\\
+&= 3 \cdot e^x + 2^x \ln 2\\
+&= 3e^x + 2^x \ln 2
+\end{align}
+\end{example}
+
+\begin{example}
+Find the derivative of $y = e^{3x^2 + 2x}$.
+
+Using the chain rule:
+\begin{align}
+y' &= e^{3x^2 + 2x} \cdot \frac{d}{dx}[3x^2 + 2x]\\
+&= e^{3x^2 + 2x} \cdot (6x + 2)\\
+&= (6x + 2)e^{3x^2 + 2x}
+\end{align}
+\end{example}
+
+\subsection{Applications of Exponential Derivatives}
+
+Exponential derivatives appear frequently in real-world applications:
+
+\begin{example}[Population Growth]
+If a population grows according to $P(t) = 1000e^{0.05t}$ (where $t$ is in years), find the growth rate at any time.
+
+\begin{align}
+P'(t) &= 1000 \cdot e^{0.05t} \cdot 0.05\\
+&= 50e^{0.05t}
+\end{align}
+
+This tells us that at time $t$, the population is growing at a rate of $50e^{0.05t}$ individuals per year.
+\end{example}
+
+\subsection{Practice Problems - Chapter 4}
+
+\textbf{Problem 4.1:} Find the derivative of $f(x) = 5e^x - 3^x$.
+
+\textbf{Problem 4.2:} Find $\frac{dy}{dx}$ if $y = e^{2x - 1}$.
+
+\textbf{Problem 4.3:} Find the derivative of $g(t) = te^t$.
+
+\textbf{Problem 4.4:} Find the derivative of $h(x) = \frac{e^x}{x + 1}$.
+
+\textbf{Problem 4.5:} Find the derivative of $f(x) = e^{\sin x}$.
+
+\chapter{Derivatives of Logarithmic Functions}
+
+\section{Understanding Logarithmic Functions}
+
+\begin{intuition}
+Logarithmic functions are the inverse of exponential functions. While exponential functions answer "What do I get if I raise this base to this power?", logarithmic functions answer "What power do I need to raise this base to get this result?"
+
+The derivative of a logarithmic function tells us about rates of proportional change. In economics, if $\ln(x)$ represents some economic quantity, its derivative $1/x$ represents the percentage rate of change.
+\end{intuition}
+
+\subsection{Basic Logarithmic Derivatives}
+
+\begin{keyformula}
+The fundamental logarithmic derivatives are:
+
+$$\frac{d}{dx}[\ln x] = \frac{1}{x}$$
+
+$$\frac{d}{dx}[\log_a x] = \frac{1}{x \ln a}$$
+
+For composite functions:
+$$\frac{d}{dx}[\ln(f(x))] = \frac{f'(x)}{f(x)}$$
+\end{keyformula}
+
+\begin{example}
+Find the derivative of $f(x) = 3\ln x + \log_2 x$.
+
+\begin{align}
+f'(x) &= 3 \cdot \frac{1}{x} + \frac{1}{x \ln 2}\\
+&= \frac{3}{x} + \frac{1}{x \ln 2}\\
+&= \frac{1}{x}\left(3 + \frac{1}{\ln 2}\right)
+\end{align}
+\end{example}
+
+\begin{example}
+Find the derivative of $y = \ln(x^2 + 3x + 1)$.
+
+Using the chain rule:
+\begin{align}
+y' &= \frac{1}{x^2 + 3x + 1} \cdot \frac{d}{dx}[x^2 + 3x + 1]\\
+&= \frac{1}{x^2 + 3x + 1} \cdot (2x + 3)\\
+&= \frac{2x + 3}{x^2 + 3x + 1}
+\end{align}
+\end{example}
+
+\subsection{Logarithmic Differentiation}
+
+Sometimes it's easier to take the logarithm of both sides before differentiating, especially for products, quotients, or functions raised to variable powers.
+
+\begin{example}
+Find the derivative of $y = x^x$ (where $x > 0$).
+
+Taking the natural logarithm of both sides:
+\begin{align}
+\ln y &= \ln(x^x) = x \ln x
+\end{align}
+
+Differentiating both sides with respect to $x$:
+\begin{align}
+\frac{1}{y} \cdot y' &= \frac{d}{dx}[x \ln x] = 1 \cdot \ln x + x \cdot \frac{1}{x} = \ln x + 1
+\end{align}
+
+Therefore:
+\begin{align}
+y' &= y(\ln x + 1) = x^x(\ln x + 1)
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 5}
+
+\textbf{Problem 5.1:} Find the derivative of $f(x) = 2\ln x - \log_3 x$.
+
+\textbf{Problem 5.2:} Find $\frac{dy}{dx}$ if $y = \ln(3x^2 - 2x + 1)$.
+
+\textbf{Problem 5.3:} Find the derivative of $g(x) = x^2 \ln x$.
+
+\textbf{Problem 5.4:} Use logarithmic differentiation to find the derivative of $h(x) = (x + 1)^x$.
+
+\textbf{Problem 5.5:} Find the derivative of $f(x) = \frac{\ln x}{x^2}$.
+
+\chapter{Second Derivatives}
+
+\section{Understanding Second Derivatives}
+
+\begin{intuition}
+If the first derivative tells us about velocity (rate of change), the second derivative tells us about acceleration (rate of change of the rate of change).
+
+Consider a car:
+\begin{itemize}
+    \item Position: $s(t)$
+    \item Velocity: $s'(t)$ = first derivative
+    \item Acceleration: $s''(t)$ = second derivative
+\end{itemize}
+
+For graphs, the second derivative tells us about concavity:
+\begin{itemize}
+    \item $f''(x) > 0$: The graph is concave up (smiling, like $\cup$)
+    \item $f''(x) < 0$: The graph is concave down (frowning, like $\cap$)
+\end{itemize}
+\end{intuition}
+
+\subsection{Computing Second Derivatives}
+
+\begin{keyformula}
+The second derivative is simply the derivative of the first derivative:
+
+$$f''(x) = \frac{d}{dx}[f'(x)]$$
+
+Alternative notations:
+$$f''(x) = \frac{d^2f}{dx^2} = \frac{d^2y}{dx^2}$$
+\end{keyformula}
+
+\begin{example}
+Find the second derivative of $f(x) = x^4 - 3x^3 + 2x^2 - x + 5$.
+
+First, find the first derivative:
+$$f'(x) = 4x^3 - 9x^2 + 4x - 1$$
+
+Now differentiate again:
+$$f''(x) = 12x^2 - 18x + 4$$
+\end{example}
+
+\begin{example}
+Find the second derivative of $y = e^{2x}$.
+
+First derivative:
+$$y' = 2e^{2x}$$
+
+Second derivative:
+$$y'' = 2 \cdot 2e^{2x} = 4e^{2x}$$
+\end{example}
+
+\subsection{Concavity and Inflection Points}
+
+\begin{definition}
+A function is:
+\begin{itemize}
+    \item \textbf{Concave up} on an interval if $f''(x) > 0$ on that interval
+    \item \textbf{Concave down} on an interval if $f''(x) < 0$ on that interval
+    \item Has an \textbf{inflection point} at $x = c$ if the concavity changes at $x = c$
+\end{itemize}
+\end{definition}
+
+\begin{example}
+Analyze the concavity of $f(x) = x^3 - 6x^2 + 9x$.
+
+First derivative: $f'(x) = 3x^2 - 12x + 9$
+Second derivative: $f''(x) = 6x - 12 = 6(x - 2)$
+
+\begin{itemize}
+    \item When $x < 2$: $f''(x) < 0$, so $f$ is concave down
+    \item When $x > 2$: $f''(x) > 0$, so $f$ is concave up
+    \item At $x = 2$: $f''(2) = 0$ and concavity changes, so there's an inflection point at $x = 2$
+\end{itemize}
+\end{example}
+
+\subsection{The Second Derivative Test}
+
+\begin{theorem}[Second Derivative Test]
+If $f'(c) = 0$ and:
+\begin{itemize}
+    \item $f''(c) > 0$, then $f$ has a local minimum at $x = c$
+    \item $f''(c) < 0$, then $f$ has a local maximum at $x = c$
+    \item $f''(c) = 0$, the test is inconclusive
+\end{itemize}
+\end{theorem}
+
+\subsection{Practice Problems - Chapter 6}
+
+\textbf{Problem 6.1:} Find the second derivative of $f(x) = 2x^5 - 3x^4 + x^2 - 7$.
+
+\textbf{Problem 6.2:} Find $\frac{d^2y}{dx^2}$ if $y = \sin(2x)$.
+
+\textbf{Problem 6.3:} Find the second derivative of $g(x) = xe^x$.
+
+\textbf{Problem 6.4:} Determine the concavity of $h(x) = x^4 - 4x^3$.
+
+\textbf{Problem 6.5:} Find all inflection points of $f(x) = x^3 - 3x^2 + 2$.
+
+\chapter{Extreme Values}
+
+\section{Understanding Extreme Values}
+
+\begin{intuition}
+Extreme values are the "peaks and valleys" of a function - the highest and lowest points. In real life, we often want to optimize something:
+\begin{itemize}
+    \item Maximize profit or minimize cost in business
+    \item Find the strongest beam design in engineering
+    \item Determine the most efficient route in logistics
+\end{itemize}
+
+Critical points are where the derivative equals zero (horizontal tangent) or doesn't exist (sharp corner or vertical tangent). These are the candidates for extreme values.
+\end{intuition}
+
+\subsection{Types of Extreme Values}
+
+\begin{definition}
+Let $f$ be a function and $c$ a point in its domain:
+\begin{itemize}
+    \item $f(c)$ is a \textbf{local maximum} if $f(x) \leq f(c)$ for all $x$ near $c$
+    \item $f(c)$ is a \textbf{local minimum} if $f(x) \geq f(c)$ for all $x$ near $c$
+    \item $f(c)$ is an \textbf{absolute maximum} if $f(x) \leq f(c)$ for all $x$ in the domain
+    \item $f(c)$ is an \textbf{absolute minimum} if $f(x) \geq f(c)$ for all $x$ in the domain
+\end{itemize}
+\end{definition}
+
+\subsection{Finding Critical Points}
+
+\begin{keyformula}
+A \textbf{critical point} occurs at $x = c$ if:
+\begin{itemize}
+    \item $f'(c) = 0$, or
+    \item $f'(c)$ does not exist
+\end{itemize}
+\end{keyformula}
+
+\begin{example}
+Find all critical points of $f(x) = x^3 - 3x^2 + 2$.
+
+First, find the derivative:
+$$f'(x) = 3x^2 - 6x = 3x(x - 2)$$
+
+Set $f'(x) = 0$:
+$$3x(x - 2) = 0$$
+
+This gives us $x = 0$ or $x = 2$.
+
+Since $f'(x)$ exists for all real numbers, the critical points are $x = 0$ and $x = 2$.
+\end{example}
+
+\subsection{The First Derivative Test}
+
+\begin{theorem}[First Derivative Test]
+Let $c$ be a critical point of $f$. Then:
+\begin{itemize}
+    \item If $f'(x)$ changes from positive to negative at $c$, then $f(c)$ is a local maximum
+    \item If $f'(x)$ changes from negative to positive at $c$, then $f(c)$ is a local minimum
+    \item If $f'(x)$ doesn't change sign at $c$, then $f(c)$ is neither a local max nor min
+\end{itemize}
+\end{theorem}
+
+\begin{example}
+Use the First Derivative Test to classify the critical points of $f(x) = x^3 - 3x^2 + 2$.
+
+We found critical points at $x = 0$ and $x = 2$, with $f'(x) = 3x(x-2)$.
+
+Test intervals:
+\begin{itemize}
+    \item For $x < 0$: Choose $x = -1$, then $f'(-1) = 3(-1)((-1)-2) = 9 > 0$
+    \item For $0 < x < 2$: Choose $x = 1$, then $f'(1) = 3(1)(1-2) = -3 < 0$
+    \item For $x > 2$: Choose $x = 3$, then $f'(3) = 3(3)(3-2) = 9 > 0$
+\end{itemize}
+
+At $x = 0$: $f'$ changes from $+$ to $-$, so $f(0) = 2$ is a local maximum.
+At $x = 2$: $f'$ changes from $-$ to $+$, so $f(2) = -2$ is a local minimum.
+\end{example}
+
+\subsection{Absolute Extrema on Closed Intervals}
+
+\begin{theorem}[Extreme Value Theorem]
+If $f$ is continuous on a closed interval $[a,b]$, then $f$ has both an absolute maximum and an absolute minimum on $[a,b]$.
+\end{theorem}
+
+\begin{keyformula}
+To find absolute extrema on $[a,b]$:
+\begin{enumerate}
+    \item Find all critical points in $(a,b)$
+    \item Evaluate $f$ at critical points and endpoints $a$ and $b$
+    \item The largest value is the absolute maximum
+    \item The smallest value is the absolute minimum
+\end{enumerate}
+\end{keyformula}
+
+\begin{example}
+Find the absolute extrema of $f(x) = x^3 - 3x^2 + 2$ on $[-1, 3]$.
+
+Critical points: $x = 0, 2$ (both in the interval)
+
+Evaluate $f$ at critical points and endpoints:
+\begin{align}
+f(-1) &= (-1)^3 - 3(-1)^2 + 2 = -1 - 3 + 2 = -2\\
+f(0) &= 0^3 - 3(0)^2 + 2 = 2\\
+f(2) &= 2^3 - 3(2)^2 + 2 = 8 - 12 + 2 = -2\\
+f(3) &= 3^3 - 3(3)^2 + 2 = 27 - 27 + 2 = 2
+\end{align}
+
+Absolute maximum: $f(0) = f(3) = 2$
+Absolute minimum: $f(-1) = f(2) = -2$
+\end{example}
+
+\subsection{Practice Problems - Chapter 7}
+
+\textbf{Problem 7.1:} Find all critical points of $f(x) = x^4 - 4x^3 + 6x^2$.
+
+\textbf{Problem 7.2:} Use the First Derivative Test to classify the critical points of $g(x) = 2x^3 - 9x^2 + 12x$.
+
+\textbf{Problem 7.3:} Find the absolute extrema of $h(x) = x^2 - 4x + 3$ on $[0, 5]$.
+
+\textbf{Problem 7.4:} Find all critical points of $f(x) = xe^{-x}$.
+
+\textbf{Problem 7.5:} Find the absolute extrema of $g(x) = \sin x + \cos x$ on $[0, 2\pi]$.
+
+\chapter{Limits and L'Hôpital's Rule}
+
+\section{Understanding Limits}
+
+\begin{intuition}
+A limit describes the behavior of a function as the input approaches a particular value. Think of it as asking: "What value does the function get arbitrarily close to as $x$ gets arbitrarily close to some number $a$?"
+
+Sometimes we can't simply substitute the value (like when we get $\frac{0}{0}$), but we can still determine what the function approaches. It's like asking: "Where is this function heading?"
+\end{intuition}
+
+\subsection{Indeterminate Forms}
+
+\begin{definition}
+Common indeterminate forms include:
+$\frac{0}{0}, \quad \frac{\infty}{\infty}, \quad 0 \cdot \infty, \quad \infty - \infty, \quad 0^0, \quad 1^\infty, \quad \infty^0$
+
+These expressions don't have a definite value and require further analysis.
+\end{definition}
+
+\subsection{L'Hôpital's Rule}
+
+\begin{theorem}[L'Hôpital's Rule]
+If $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$ (or both limits are $\pm\infty$), and if $\lim_{x \to a} \frac{f'(x)}{g'(x)}$ exists, then:
+
+$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$
+
+The rule can be applied repeatedly if the resulting limit is still indeterminate.
+\end{theorem}
+
+\begin{example}
+Evaluate $\lim_{x \to 0} \frac{\sin x}{x}$.
+
+This is a $\frac{0}{0}$ indeterminate form. Apply L'Hôpital's Rule:
+
+$\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\frac{d}{dx}[\sin x]}{\frac{d}{dx}[x]} = \lim_{x \to 0} \frac{\cos x}{1} = \cos 0 = 1$
+\end{example}
+
+\begin{example}
+Evaluate $\lim_{x \to \infty} \frac{x^2}{e^x}$.
+
+This is a $\frac{\infty}{\infty}$ form. Apply L'Hôpital's Rule:
+
+$\lim_{x \to \infty} \frac{x^2}{e^x} = \lim_{x \to \infty} \frac{2x}{e^x}$
+
+Still $\frac{\infty}{\infty}$, so apply L'Hôpital's Rule again:
+
+$\lim_{x \to \infty} \frac{2x}{e^x} = \lim_{x \to \infty} \frac{2}{e^x} = 0$
+
+This shows that exponential functions grow faster than polynomial functions.
+\end{example}
+
+\subsection{Other Indeterminate Forms}
+
+For forms like $0 \cdot \infty$, rewrite as a fraction:
+
+\begin{example}
+Evaluate $\lim_{x \to 0^+} x \ln x$.
+
+This is a $0 \cdot (-\infty)$ form. Rewrite as:
+$\lim_{x \to 0^+} x \ln x = \lim_{x \to 0^+} \frac{\ln x}{1/x}$
+
+This is now $\frac{-\infty}{\infty}$. Apply L'Hôpital's Rule:
+$\lim_{x \to 0^+} \frac{\ln x}{1/x} = \lim_{x \to 0^+} \frac{1/x}{-1/x^2} = \lim_{x \to 0^+} \frac{x^2}{-x} = \lim_{x \to 0^+} (-x) = 0$
+\end{example}
+
+\subsection{Practice Problems - Chapter 8}
+
+\textbf{Problem 8.1:} Evaluate $\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$.
+
+\textbf{Problem 8.2:} Use L'Hôpital's Rule to find $\lim_{x \to 0} \frac{1 - \cos x}{x^2}$.
+
+\textbf{Problem 8.3:} Evaluate $\lim_{x \to \infty} \frac{\ln x}{x}$.
+
+\textbf{Problem 8.4:} Find $\lim_{x \to 0^+} x^2 \ln x$.
+
+\textbf{Problem 8.5:} Evaluate $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$.
+
+\chapter{Integrals of Polynomials}
+
+\section{Understanding Integration}
+
+\begin{intuition}
+Integration is the reverse process of differentiation. While derivatives measure rates of change, integrals measure accumulation. Think of integration as:
+\begin{itemize}
+    \item Finding the area under a curve
+    \item Calculating total distance from a velocity function
+    \item Determining total change from a rate of change function
+\end{itemize}
+
+If differentiation asks "How fast is this changing?", integration asks "How much has accumulated?"
+\end{intuition}
+
+\subsection{The Power Rule for Integration}
+
+\begin{keyformula}
+For any real number $n \neq -1$:
+$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C$
+
+where $C$ is the constant of integration.
+
+Special cases:
+$\int k \, dx = kx + C \quad \text{(constant)}$
+$\int 1 \, dx = x + C$
+\end{keyformula}
+
+\begin{example}
+Find $\int (3x^4 - 2x^2 + 5x - 1) \, dx$.
+
+Apply the power rule to each term:
+\begin{align}
+\int (3x^4 - 2x^2 + 5x - 1) \, dx &= 3 \cdot \frac{x^5}{5} - 2 \cdot \frac{x^3}{3} + 5 \cdot \frac{x^2}{2} - x + C\\
+&= \frac{3x^5}{5} - \frac{2x^3}{3} + \frac{5x^2}{2} - x + C
+\end{align}
+\end{example}
+
+\subsection{The Fundamental Theorem of Calculus}
+
+\begin{theorem}[Fundamental Theorem of Calculus - Part 1]
+If $f$ is continuous on $[a,b]$ and $F(x) = \int_a^x f(t) \, dt$, then $F'(x) = f(x)$.
+
+In other words: $\frac{d}{dx} \int_a^x f(t) \, dt = f(x)$
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Calculus - Part 2]
+If $f$ is continuous on $[a,b]$ and $F$ is any antiderivative of $f$, then:
+$\int_a^b f(x) \, dx = F(b) - F(a)$
+\end{theorem}
+
+\begin{example}
+Evaluate $\int_1^3 (2x^2 - x + 1) \, dx$.
+
+First, find the antiderivative:
+$F(x) = \frac{2x^3}{3} - \frac{x^2}{2} + x$
+
+Then apply the Fundamental Theorem:
+\begin{align}
+\int_1^3 (2x^2 - x + 1) \, dx &= F(3) - F(1)\\
+&= \left(\frac{2(3)^3}{3} - \frac{(3)^2}{2} + 3\right) - \left(\frac{2(1)^3}{3} - \frac{(1)^2}{2} + 1\right)\\
+&= \left(18 - 4.5 + 3\right) - \left(\frac{2}{3} - 0.5 + 1\right)\\
+&= 16.5 - \frac{7}{6} = \frac{92}{6} = \frac{46}{3}
+\end{align}
+\end{example}
+
+\subsection{Area Under Curves}
+
+\begin{intuition}
+When $f(x) \geq 0$ on $[a,b]$, the definite integral $\int_a^b f(x) \, dx$ gives the area between the curve $y = f(x)$ and the x-axis from $x = a$ to $x = b$.
+
+When $f(x) < 0$, the integral gives the negative of the area (since we're "below" the x-axis).
+\end{intuition}
+
+\begin{example}
+Find the area between $y = x^2 - 4$ and the x-axis from $x = -2$ to $x = 2$.
+
+First, note where $x^2 - 4 = 0$: $x = \pm 2$.
+
+The function is negative on $(-2, 2)$, so we need the absolute value of the integral:
+
+\begin{align}
+\text{Area} &= \left| \int_{-2}^2 (x^2 - 4) \, dx \right|\\
+&= \left| \left[ \frac{x^3}{3} - 4x \right]_{-2}^2 \right|\\
+&= \left| \left(\frac{8}{3} - 8\right) - \left(\frac{-8}{3} + 8\right) \right|\\
+&= \left| \frac{8}{3} - 8 + \frac{8}{3} - 8 \right|\\
+&= \left| \frac{16}{3} - 16 \right| = \left| -\frac{32}{3} \right| = \frac{32}{3}
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 9}
+
+\textbf{Problem 9.1:} Find $\int (4x^3 - 6x^2 + 2x - 5) \, dx$.
+
+\textbf{Problem 9.2:} Evaluate $\int_0^2 (3x^2 + 2x - 1) \, dx$.
+
+\textbf{Problem 9.3:} Find the area under $y = x^3 - x$ from $x = 0$ to $x = 2$.
+
+\textbf{Problem 9.4:} Evaluate $\int_{-1}^1 (x^4 - x^2) \, dx$.
+
+\textbf{Problem 9.5:} Find $\int (2\sqrt{x} + \frac{3}{x^2}) \, dx$. (Hint: Rewrite as $2x^{1/2} + 3x^{-2}$)
+
+\chapter{Definite Integrals}
+
+\section{Understanding Definite Integrals}
+
+\begin{intuition}
+A definite integral $\int_a^b f(x) \, dx$ represents the "net signed area" between the curve $y = f(x)$ and the x-axis from $x = a$ to $x = b$. 
+
+Think of it as:
+\begin{itemize}
+    \item The total distance traveled (if $f(x) \geq 0$ represents velocity)
+    \item The net change in a quantity (if $f(x)$ represents a rate of change)
+    \item The accumulated total of some continuous process
+\end{itemize}
+
+The key difference from indefinite integrals: definite integrals give us a number, not a function, and we don't need the constant $C$.
+\end{intuition}
+
+\subsection{Properties of Definite Integrals}
+
+\begin{keyformula}
+Key properties of definite integrals:
+
+1. $\int_a^a f(x) \, dx = 0$
+
+2. $\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx$
+
+3. $\int_a^b [f(x) + g(x)] \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \, dx$
+
+4. $\int_a^b kf(x) \, dx = k\int_a^b f(x) \, dx$ (where $k$ is constant)
+
+5. $\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$ (for any $c$)
+\end{keyformula}
+
+\begin{example}
+Use properties to evaluate $\int_{-2}^3 (x^2 - 4) \, dx$.
+
+We can split this at $x = 0$ for convenience:
+\begin{align}
+\int_{-2}^3 (x^2 - 4) \, dx &= \int_{-2}^0 (x^2 - 4) \, dx + \int_0^3 (x^2 - 4) \, dx
+\end{align}
+
+For the first integral:
+\begin{align}
+\int_{-2}^0 (x^2 - 4) \, dx &= \left[ \frac{x^3}{3} - 4x \right]_{-2}^0\\
+&= (0 - 0) - \left(\frac{-8}{3} - 4(-2)\right)\\
+&= 0 - \left(-\frac{8}{3} + 8\right) = -\frac{16}{3}
+\end{align}
+
+For the second integral:
+\begin{align}
+\int_0^3 (x^2 - 4) \, dx &= \left[ \frac{x^3}{3} - 4x \right]_0^3\\
+&= \left(\frac{27}{3} - 12\right) - (0 - 0)\\
+&= 9 - 12 = -3
+\end{align}
+
+Therefore: $\int_{-2}^3 (x^2 - 4) \, dx = -\frac{16}{3} + (-3) = -\frac{25}{3}$
+\end{example}
+
+\subsection{Average Value of a Function}
+
+\begin{definition}
+The average value of a function $f(x)$ on the interval $[a,b]$ is:
+$\text{Average value} = \frac{1}{b-a} \int_a^b f(x) \, dx$
+\end{definition}
+
+\begin{example}
+Find the average value of $f(x) = x^2$ on $[0, 3]$.
+
+\begin{align}
+\text{Average value} &= \frac{1}{3-0} \int_0^3 x^2 \, dx\\
+&= \frac{1}{3} \left[ \frac{x^3}{3} \right]_0^3\\
+&= \frac{1}{3} \cdot \frac{27}{3} = 3
+\end{align}
+\end{example}
+
+\subsection{Applications of Definite Integrals}
+
+\begin{example}[Distance and Displacement]
+A particle moves with velocity $v(t) = t^2 - 4t + 3$ m/s. Find:
+a) The displacement from $t = 0$ to $t = 4$
+b) The total distance traveled
+
+a) Displacement = $\int_0^4 (t^2 - 4t + 3) \, dt$
+\begin{align}
+&= \left[ \frac{t^3}{3} - 2t^2 + 3t \right]_0^4\\
+&= \left(\frac{64}{3} - 32 + 12\right) - 0\\
+&= \frac{64}{3} - 20 = \frac{4}{3} \text{ meters}
+\end{align}
+
+b) For total distance, we need to consider when velocity is negative.
+$v(t) = t^2 - 4t + 3 = (t-1)(t-3)$
+
+Velocity is negative on $(1,3)$, so:
+\begin{align}
+\text{Total distance} &= \int_0^1 |v(t)| \, dt + \int_1^3 |v(t)| \, dt + \int_3^4 |v(t)| \, dt\\
+&= \int_0^1 v(t) \, dt + \int_1^3 (-v(t)) \, dt + \int_3^4 v(t) \, dt\\
+&= \frac{8}{3} + \frac{8}{3} + \frac{8}{3} = 8 \text{ meters}
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 10}
+
+\textbf{Problem 10.1:} Evaluate $\int_{-1}^2 (2x^3 - x^2 + 3) \, dx$.
+
+\textbf{Problem 10.2:} Find the average value of $f(x) = 4x - x^2$ on $[0, 4]$.
+
+\textbf{Problem 10.3:} A particle has velocity $v(t) = 6t - t^2$ m/s. Find the displacement from $t = 1$ to $t = 5$.
+
+\textbf{Problem 10.4:} Evaluate $\int_0^{\pi} \sin x \, dx$.
+
+\textbf{Problem 10.5:} Find the area between $y = x^3 - x$ and the x-axis from $x = -1$ to $x = 1$.
+
+\chapter{Integrals of Trigonometric Functions}
+
+\section{Basic Trigonometric Integrals}
+
+\begin{intuition}
+Trigonometric integrals often arise in applications involving periodic phenomena - waves, oscillations, circular motion. Just as trigonometric derivatives followed patterns, so do their integrals.
+
+Remember that integration is the reverse of differentiation, so if we know that $\frac{d}{dx}[\sin x] = \cos x$, then we know that $\int \cos x \, dx = \sin x + C$.
+\end{intuition}
+
+\subsection{Basic Trigonometric Integration Formulas}
+
+\begin{keyformula}
+The fundamental trigonometric integrals are:
+\begin{align}
+\int \sin x \, dx &= -\cos x + C\\
+\int \cos x \, dx &= \sin x + C\\
+\int \sec^2 x \, dx &= \tan x + C\\
+\int \csc^2 x \, dx &= -\cot x + C\\
+\int \sec x \tan x \, dx &= \sec x + C\\
+\int \csc x \cot x \, dx &= -\csc x + C
+\end{align}
+\end{keyformula}
+
+\begin{example}
+Evaluate $\int (3\sin x - 2\cos x + \sec^2 x) \, dx$.
+
+\begin{align}
+\int (3\sin x - 2\cos x + \sec^2 x) \, dx &= 3\int \sin x \, dx - 2\int \cos x \, dx + \int \sec^2 x \, dx\\
+&= 3(-\cos x) - 2(\sin x) + \tan x + C\\
+&= -3\cos x - 2\sin x + \tan x + C
+\end{align}
+\end{example}
+
+\subsection{Integrals with Chain Rule (Substitution)}
+
+When the argument of a trigonometric function is more complex, we often need substitution.
+
+\begin{example}
+Find $\int \sin(3x + 1) \, dx$.
+
+Let $u = 3x + 1$, so $du = 3 \, dx$, which means $dx = \frac{1}{3} du$.
+
+\begin{align}
+\int \sin(3x + 1) \, dx &= \int \sin u \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int \sin u \, du\\
+&= \frac{1}{3}(-\cos u) + C\\
+&= -\frac{1}{3}\cos(3x + 1) + C
+\end{align}
+\end{example}
+
+\begin{example}
+Evaluate $\int x \cos(x^2) \, dx$.
+
+Let $u = x^2$, so $du = 2x \, dx$, which means $x \, dx = \frac{1}{2} du$.
+
+\begin{align}
+\int x \cos(x^2) \, dx &= \int \cos(u) \cdot \frac{1}{2} \, du\\
+&= \frac{1}{2} \int \cos u \, du\\
+&= \frac{1}{2} \sin u + C\\
+&= \frac{1}{2} \sin(x^2) + C
+\end{align}
+\end{example}
+
+\subsection{Definite Trigonometric Integrals}
+
+\begin{example}
+Evaluate $\int_0^{\pi/2} \sin x \, dx$.
+
+\begin{align}
+\int_0^{\pi/2} \sin x \, dx &= [-\cos x]_0^{\pi/2}\\
+&= -\cos\left(\frac{\pi}{2}\right) - (-\cos(0))\\
+&= -0 + 1 = 1
+\end{align}
+
+This represents the area under one "hump" of the sine curve.
+\end{example}
+
+\subsection{Applications}
+
+\begin{example}[Harmonic Motion]
+The velocity of a particle in harmonic motion is given by $v(t) = 4\cos(2t)$ cm/s. Find the position function if the particle starts at position $s(0) = 3$ cm.
+
+We need to integrate the velocity:
+\begin{align}
+s(t) &= \int v(t) \, dt = \int 4\cos(2t) \, dt
+\end{align}
+
+Using substitution with $u = 2t$, $du = 2 \, dt$:
+\begin{align}
+s(t) &= \int 4\cos(u) \cdot \frac{1}{2} \, du = 2\int \cos(u) \, du\\
+&= 2\sin(u) + C = 2\sin(2t) + C
+\end{align}
+
+Using the initial condition $s(0) = 3$:
+\begin{align}
+3 &= 2\sin(0) + C = 0 + C\\
+C &= 3
+\end{align}
+
+Therefore: $s(t) = 2\sin(2t) + 3$
+\end{example}
+
+\subsection{Practice Problems - Chapter 11}
+
+\textbf{Problem 11.1:} Find $\int (2\sin x + 3\cos x - \sec^2 x) \, dx$.
+
+\textbf{Problem 11.2:} Evaluate $\int \cos(4x - 1) \, dx$.
+
+\textbf{Problem 11.3:} Find $\int_0^{\pi} (1 + \cos x) \, dx$.
+
+\textbf{Problem 11.4:} Evaluate $\int 2x \sin(x^2 + 1) \, dx$.
+
+\textbf{Problem 11.5:} Find $\int \sec(3x) \tan(3x) \, dx$.
+
+\chapter{Integrals of Exponential and Logarithmic Functions}
+
+\section{Exponential Integrals}
+
+\begin{intuition}
+Exponential functions describe growth and decay processes. When we integrate them, we're finding the total accumulation of a quantity that grows or decays exponentially.
+
+For example, if a population grows at rate $P'(t) = ke^{rt}$, then integrating gives us the total change in population over time.
+\end{intuition}
+
+\subsection{Basic Exponential Integration}
+
+\begin{keyformula}
+The fundamental exponential integrals are:
+\begin{align}
+\int e^x \, dx &= e^x + C\\
+\int a^x \, dx &= \frac{a^x}{\ln a} + C \quad (a > 0, a \neq 1)\\
+\int e^{kx} \, dx &= \frac{1}{k}e^{kx} + C \quad (k \neq 0)
+\end{align}
+\end{keyformula}
+
+\begin{example}
+Find $\int (3e^x + 2^x - 5e^{2x}) \, dx$.
+
+\begin{align}
+\int (3e^x + 2^x - 5e^{2x}) \, dx &= 3\int e^x \, dx + \int 2^x \, dx - 5\int e^{2x} \, dx\\
+&= 3e^x + \frac{2^x}{\ln 2} - 5 \cdot \frac{1}{2}e^{2x} + C\\
+&= 3e^x + \frac{2^x}{\ln 2} - \frac{5}{2}e^{2x} + C
+\end{align}
+\end{example}
+
+\begin{example}
+Evaluate $\int_0^1 e^{3x-1} \, dx$.
+
+Using substitution: let $u = 3x - 1$, so $du = 3 \, dx$.
+When $x = 0$, $u = -1$. When $x = 1$, $u = 2$.
+
+\begin{align}
+\int_0^1 e^{3x-1} \, dx &= \int_{-1}^2 e^u \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int_{-1}^2 e^u \, du\\
+&= \frac{1}{3} [e^u]_{-1}^2\\
+&= \frac{1}{3}(e^2 - e^{-1})\\
+&= \frac{1}{3}\left(e^2 - \frac{1}{e}\right)
+\end{align}
+\end{example}
+
+\section{Logarithmic Integrals}
+
+\subsection{Integration Involving Logarithms}
+
+\begin{keyformula}
+Key logarithmic integration formulas:
+\begin{align}
+\int \frac{1}{x} \, dx &= \ln|x| + C\\
+\int \frac{f'(x)}{f(x)} \, dx &= \ln|f(x)| + C\\
+\int \ln x \, dx &= x\ln x - x + C \quad \text{(integration by parts)}
+\end{align}
+\end{keyformula}
+
+\begin{example}
+Find $\int \frac{2x + 1}{x^2 + x + 1} \, dx$.
+
+Notice that the derivative of the denominator is $2x + 1$, which is exactly our numerator!
+
+Using the formula $\int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + C$:
+
+$\int \frac{2x + 1}{x^2 + x + 1} \, dx = \ln|x^2 + x + 1| + C$
+\end{example}
+
+\begin{example}
+Find $\int \frac{1}{3x - 2} \, dx$.
+
+Let $u = 3x - 2$, so $du = 3 \, dx$, which means $dx = \frac{1}{3} du$.
+
+\begin{align}
+\int \frac{1}{3x - 2} \, dx &= \int \frac{1}{u} \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int \frac{1}{u} \, du\\
+&= \frac{1}{3} \ln|u| + C\\
+&= \frac{1}{3} \ln|3x - 2| + C
+\end{align}
+\end{example}
+
+\subsection{Applications of Exponential and Logarithmic Integrals}
+
+\begin{example}[Compound Interest]
+Money is invested at a continuously compounded interest rate. If the rate of growth of the account is $\frac{dA}{dt} = 0.06A$ (where $A$ is in dollars and $t$ is in years), and the account starts with $A(0) = 1000$, find $A(t)$.
+
+We need to solve: $\frac{dA}{dt} = 0.06A$
+
+Separating variables: $\frac{dA}{A} = 0.06 \, dt$
+
+Integrating both sides:
+\begin{align}
+\int \frac{dA}{A} &= \int 0.06 \, dt\\
+\ln|A| &= 0.06t + C_1\\
+|A| &= e^{0.06t + C_1} = e^{C_1} \cdot e^{0.06t}
+\end{align}
+
+Since $A > 0$ (money), we have $A = Ce^{0.06t}$ where $C = e^{C_1}$.
+
+Using $A(0) = 1000$:
+$1000 = Ce^{0} = C$
+
+Therefore: $A(t) = 1000e^{0.06t}$
+\end{example}
+
+\begin{example}[Population Decay]
+A population decays according to $P'(t) = -0.1P(t)$. If $P(0) = 500$, find when the population reaches 100.
+
+Following similar steps as above:
+$P(t) = 500e^{-0.1t}$
+
+To find when $P(t) = 100$:
+\begin{align}
+100 &= 500e^{-0.1t}\\
+\frac{1}{5} &= e^{-0.1t}\\
+\ln\left(\frac{1}{5}\right) &= -0.1t\\
+t &= \frac{\ln(1/5)}{-0.1} = \frac{-\ln 5}{-0.1} = 10\ln 5 \approx 16.09 \text{ time units}
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 12}
+
+\textbf{Problem 12.1:} Find $\int (4e^x - 3^x + 2e^{-x}) \, dx$.
+
+\textbf{Problem 12.2:} Evaluate $\int \frac{3x^2}{x^3 + 1} \, dx$.
+
+\textbf{Problem 12.3:} Find $\int_1^e x \ln x \, dx$. (Use integration by parts)
+
+\textbf{Problem 12.4:} Evaluate $\int_0^{\ln 2} e^{2x} \, dx$.
+
+\textbf{Problem 12.5:} Find $\int \frac{1}{x \ln x} \, dx$. (Hint: Let $u = \ln x$)
+
+\chapter{Integration by Polynomial Substitution}
+
+\section{The Substitution Method}
+
+\begin{intuition}
+Substitution (also called $u$-substitution) is like the chain rule in reverse. When we see a function composed with another function, and the derivative of the "inner" function appears as a factor, substitution can simplify the integral dramatically.
+
+Think of it as "undoing" the chain rule. If you have $\int f'(g(x)) \cdot g'(x) \, dx$, substitution lets you convert this to $\int f'(u) \, du$ where $u = g(x)$.
+\end{intuition}
+
+\subsection{Basic Substitution Technique}
+
+\begin{keyformula}
+For an integral of the form $\int f(g(x)) \cdot g'(x) \, dx$:
+\begin{enumerate}
+    \item Let $u = g(x)$
+    \item Find $du = g'(x) \, dx$
+    \item Substitute to get $\int f(u) \, du$
+    \item Integrate with respect to $u$
+    \item Substitute back: replace $u$ with $g(x)$
+\end{enumerate}
+\end{keyformula}
+
+\begin{example}
+Find $\int (3x^2 + 1)^5 \cdot 6x \, dx$.
+
+Let $u = 3x^2 + 1$, then $du = 6x \, dx$.
+
+\begin{align}
+\int (3x^2 + 1)^5 \cdot 6x \, dx &= \int u^5 \, du\\
+&= \frac{u^6}{6} + C\\
+&= \frac{(3x^2 + 1)^6}{6} + C
+\end{align}
+\end{example}
+
+\begin{example}
+Find $\int \frac{2x}{\sqrt{x^2 + 4}} \, dx$.
+
+Let $u = x^2 + 4$, then $du = 2x \, dx$.
+
+\begin{align}
+\int \frac{2x}{\sqrt{x^2 + 4}} \, dx &= \int \frac{1}{\sqrt{u}} \, du\\
+&= \int u^{-1/2} \, du\\
+&= \frac{u^{1/2}}{1/2} + C\\
+&= 2\sqrt{u} + C\\
+&= 2\sqrt{x^2 + 4} + C
+\end{align}
+\end{example}
+
+\subsection{When the Derivative Needs Adjustment}
+
+Sometimes the derivative isn't exactly present, but we can adjust with constants.
+
+\begin{example}
+Find $\int x(x^2 + 1)^3 \, dx$.
+
+Let $u = x^2 + 1$, then $du = 2x \, dx$, so $x \, dx = \frac{1}{2} du$.
+
+\begin{align}
+\int x(x^2 + 1)^3 \, dx &= \int u^3 \cdot \frac{1}{2} \, du\\
+&= \frac{1}{2} \int u^3 \, du\\
+&= \frac{1}{2} \cdot \frac{u^4}{4} + C\\
+&= \frac{u^4}{8} + C\\
+&= \frac{(x^2 + 1)^4}{8} + C
+\end{align}
+\end{example}
+
+\subsection{Definite Integrals with Substitution}
+
+When using substitution with definite integrals, change the limits of integration.
+
+\begin{example}
+Evaluate $\int_0^2 x(x^2 + 1)^2 \, dx$.
+
+Let $u = x^2 + 1$, so $du = 2x \, dx$, which means $x \, dx = \frac{1}{2} du$.
+
+Change limits:
+- When $x = 0$: $u = 0^2 + 1 = 1$
+- When $x = 2$: $u = 2^2 + 1 = 5$
+
+\begin{align}
+\int_0^2 x(x^2 + 1)^2 \, dx &= \int_1^5 u^2 \cdot \frac{1}{2} \, du\\
+&= \frac{1}{2} \int_1^5 u^2 \, du\\
+&= \frac{1}{2} \left[ \frac{u^3}{3} \right]_1^5\\
+&= \frac{1}{2} \left( \frac{125}{3} - \frac{1}{3} \right)\\
+&= \frac{1}{2} \cdot \frac{124}{3} = \frac{62}{3}
+\end{align}
+\end{example}
+
+\subsection{More Complex Polynomial Substitutions}
+
+\begin{example}
+Find $\int \frac{x^2}{(x^3 - 2)^4} \, dx$.
+
+Let $u = x^3 - 2$, then $du = 3x^2 \, dx$, so $x^2 \, dx = \frac{1}{3} du$.
+
+\begin{align}
+\int \frac{x^2}{(x^3 - 2)^4} \, dx &= \int \frac{1}{u^4} \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int u^{-4} \, du\\
+&= \frac{1}{3} \cdot \frac{u^{-3}}{-3} + C\\
+&= -\frac{1}{9u^3} + C\\
+&= -\frac{1}{9(x^3 - 2)^3} + C
+\end{align}
+\end{example}
+
+\begin{example}
+Find $\int (2x + 3)\sqrt{x^2 + 3x - 1} \, dx$.
+
+Let $u = x^2 + 3x - 1$, then $du = (2x + 3) \, dx$.
+
+\begin{align}
+\int (2x + 3)\sqrt{x^2 + 3x - 1} \, dx &= \int \sqrt{u} \, du\\
+&= \int u^{1/2} \, du\\
+&= \frac{u^{3/2}}{3/2} + C\\
+&= \frac{2}{3}u^{3/2} + C\\
+&= \frac{2}{3}(x^2 + 3x - 1)^{3/2} + C
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 13}
+
+\textbf{Problem 13.1:} Find $\int (2x - 1)^6 \, dx$.
+
+\textbf{Problem 13.2:} Evaluate $\int x^2 \sqrt{x^3 + 8} \, dx$.
+
+\textbf{Problem 13.3:} Find $\int_1^3 \frac{x}{x^2 + 1} \, dx$.
+
+\textbf{Problem 13.4:} Evaluate $\int (3x^2 + 6x)(x^3 + 3x^2 - 1)^4 \, dx$.
+
+\textbf{Problem 13.5:} Find $\int \frac{4x^3}{(x^4 - 5)^2} \, dx$.
+
+\chapter{Integration by Trigonometric Substitution}
+
+\section{Understanding Trigonometric Substitution}
+
+\begin{intuition}
+Trigonometric substitution is powerful for integrals involving square roots of quadratic expressions. The idea comes from the Pythagorean identities:
+\begin{itemize}
+    \item $\sin^2 \theta + \cos^2 \theta = 1$
+    \item $1 + \tan^2 \theta = \sec^2 \theta$
+    \item $\sec^2 \theta - \tan^2 \theta = 1$
+\end{itemize}
+
+These identities help us eliminate square roots by expressing them in terms of trigonometric functions.
+\end{intuition}
+
+\subsection{Three Standard Forms}
+
+\begin{keyformula}
+The three main cases for trigonometric substitution:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Expression} & \textbf{Substitution} & \textbf{Identity Used} \\
+\hline
+$\sqrt{a^2 - x^2}$ & $x = a\sin\theta$ & $a^2 - a^2\sin^2\theta = a^2\cos^2\theta$ \\
+\hline
+$\sqrt{a^2 + x^2}$ & $x = a\tan\theta$ & $a^2 + a^2\tan^2\theta = a^2\sec^2\theta$ \\
+\hline
+$\sqrt{x^2 - a^2}$ & $x = a\sec\theta$ & $a^2\sec^2\theta - a^2 = a^2\tan^2\theta$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{keyformula}
+
+\subsection{Case 1: $\sqrt{a^2 - x^2}$ form}
+
+\begin{example}
+Find $\int \frac{1}{\sqrt{9 - x^2}} \, dx$.
+
+This has the form $\sqrt{a^2 - x^2}$ with $a = 3$.
+
+Let $x = 3\sin\theta$, so $dx = 3\cos\theta \, d\theta$.
+
+Then: $\sqrt{9 - x^2} = \sqrt{9 - 9\sin^2\theta} = \sqrt{9(1 - \sin^2\theta)} = 3\cos\theta$
+
+\begin{align}
+\int \frac{1}{\sqrt{9 - x^2}} \, dx &= \int \frac{1}{3\cos\theta} \cdot 3\cos\theta \, d\theta\\
+&= \int 1 \, d\theta\\
+&= \theta + C
+\end{align}
+
+Since $x = 3\sin\theta$, we have $\sin\theta = \frac{x}{3}$, so $\theta = \arcsin\left(\frac{x}{3}\right)$.
+
+Therefore: $\int \frac{1}{\sqrt{9 - x^2}} \, dx = \arcsin\left(\frac{x}{3}\right) + C$
+\end{example}
+
+\begin{example}
+Find $\int \frac{x^2}{\sqrt{4 - x^2}} \, dx$.
+
+Let $x = 2\sin\theta$, so $dx = 2\cos\theta \, d\theta$.
+Then $x^2 = 4\sin^2\theta$ and $\sqrt{4 - x^2} = 2\cos\theta$.
+
+\begin{align}
+\int \frac{x^2}{\sqrt{4 - x^2}} \, dx &= \int \frac{4\sin^2\theta}{2\cos\theta} \cdot 2\cos\theta \, d\theta\\
+&= \int 4\sin^2\theta \, d\theta\\
+&= 4\int \sin^2\theta \, d\theta
+\end{align}
+
+Using the identity $\sin^2\theta = \frac{1 - \cos(2\theta)}{2}$:
+
+\begin{align}
+&= 4\int \frac{1 - \cos(2\theta)}{2} \, d\theta\\
+&= 2\int (1 - \cos(2\theta)) \, d\theta\\
+&= 2\left(\theta - \frac{\sin(2\theta)}{2}\right) + C\\
+&= 2\theta - \sin(2\theta) + C
+\end{align}
+
+Since $\sin(2\theta) = 2\sin\theta\cos\theta$ and from our substitution:
+- $\sin\theta = \frac{x}{2}$
+- $\cos\theta = \frac{\sqrt{4-x^2}}{2}$
+
+We get:
+\begin{align}
+\int \frac{x^2}{\sqrt{4 - x^2}} \, dx &= 2\arcsin\left(\frac{x}{2}\right) - 2 \cdot \frac{x}{2} \cdot \frac{\sqrt{4-x^2}}{2} + C\\
+&= 2\arcsin\left(\frac{x}{2}\right) - \frac{x\sqrt{4-x^2}}{2} + C
+\end{align}
+\end{example}
+
+\subsection{Case 2: $\sqrt{a^2 + x^2}$ form}
+
+\begin{example}
+Find $\int \frac{1}{\sqrt{x^2 + 1}} \, dx$.
+
+This has the form $\sqrt{a^2 + x^2}$ with $a = 1$.
+
+Let $x = \tan\theta$, so $dx = \sec^2\theta \, d\theta$.
+Then $\sqrt{x^2 + 1} = \sqrt{\tan^2\theta + 1} = \sec\theta$.
+
+\begin{align}
+\int \frac{1}{\sqrt{x^2 + 1}} \, dx &= \int \frac{1}{\sec\theta} \cdot \sec^2\theta \, d\theta\\
+&= \int \sec\theta \, d\theta\\
+&= \ln|\sec\theta + \tan\theta| + C
+\end{align}
+
+Since $\tan\theta = x$ and $\sec\theta = \sqrt{x^2 + 1}$:
+
+$\int \frac{1}{\sqrt{x^2 + 1}} \, dx = \ln|x + \sqrt{x^2 + 1}| + C$
+\end{example}
+
+\subsection{Case 3: $\sqrt{x^2 - a^2}$ form}
+
+\begin{example}
+Find $\int \frac{1}{x^2\sqrt{x^2 - 4}} \, dx$.
+
+This has the form $\sqrt{x^2 - a^2}$ with $a = 2$.
+
+Let $x = 2\sec\theta$, so $dx = 2\sec\theta\tan\theta \, d\theta$.
+Then $\sqrt{x^2 - 4} = \sqrt{4\sec^2\theta - 4} = 2\tan\theta$.
+
+\begin{align}
+\int \frac{1}{x^2\sqrt{x^2 - 4}} \, dx &= \int \frac{1}{4\sec^2\theta \cdot 2\tan\theta} \cdot 2\sec\theta\tan\theta \, d\theta\\
+&= \int \frac{1}{4\sec\theta} \, d\theta\\
+&= \frac{1}{4}\int \cos\theta \, d\theta\\
+&= \frac{1}{4}\sin\theta + C
+\end{align}
+
+From the substitution $x = 2\sec\theta$, we have $\cos\theta = \frac{2}{x}$, so:
+$\sin\theta = \sqrt{1 - \cos^2\theta} = \sqrt{1 - \frac{4}{x^2}} = \frac{\sqrt{x^2-4}}{x}$
+
+Therefore: $\int \frac{1}{x^2\sqrt{x^2 - 4}} \, dx = \frac{1}{4} \cdot \frac{\sqrt{x^2-4}}{x} + C = \frac{\sqrt{x^2-4}}{4x} + C$
+\end{example}
+
+\subsection{Completing the Square}
+
+When the quadratic isn't in standard form, complete the square first.
+
+\begin{example}
+Find $\int \frac{1}{\sqrt{2x - x^2}} \, dx$.
+
+First, complete the square:
+\begin{align}
+2x - x^2 &= -(x^2 - 2x) = -(x^2 - 2x + 1 - 1) = -(x-1)^2 + 1 = 1 - (x-1)^2
+\end{align}
+
+So: $\sqrt{2x - x^2} = \sqrt{1 - (x-1)^2}$
+
+Let $u = x - 1$, so $du = dx$:
+$\int \frac{1}{\sqrt{2x - x^2}} \, dx = \int \frac{1}{\sqrt{1 - u^2}} \, du$
+
+This is now the standard form with $a = 1$. Using our result from Case 1:
+$\int \frac{1}{\sqrt{1 - u^2}} \, du = \arcsin(u) + C = \arcsin(x-1) + C$
+\end{example}
+
+\subsection{Practice Problems - Chapter 14}
+
+\textbf{Problem 14.1:} Find $\int \sqrt{16 - x^2} \, dx$.
+
+\textbf{Problem 14.2:} Evaluate $\int \frac{x^2}{\sqrt{x^2 + 9}} \, dx$.
+
+\textbf{Problem 14.3:} Find $\int \frac{1}{x\sqrt{x^2 - 1}} \, dx$.
+
+\textbf{Problem 14.4:} Evaluate $\int \frac{1}{\sqrt{x^2 + 4x + 13}} \, dx$. (Complete the square first)
+
+\textbf{Problem 14.5:} Find $\int \frac{\sqrt{25 - x^2}}{x^2} \, dx$.
+
+\chapter{Integration by Parts}
+
+\section{Understanding Integration by Parts}
+
+\begin{intuition}
+Integration by parts comes from the product rule for derivatives. Just as the product rule tells us how to differentiate a product of functions, integration by parts tells us how to integrate a product.
+
+The key insight is that sometimes it's easier to integrate one part and differentiate the other, rather than trying to integrate the product directly. It's particularly useful when you have:
+\begin{itemize}
+    \item A polynomial times an exponential function
+    \item A polynomial times a trigonometric function
+    \item A polynomial times a logarithmic function
+    \item An inverse trigonometric function times anything
+\end{itemize}
+\end{intuition}
+
+\subsection{The Integration by Parts Formula}
+
+\begin{keyformula}
+The integration by parts formula is:
+$\int u \, dv = uv - \int v \, du$
+
+Or in differential form:
+$\int u(x)v'(x) \, dx = u(x)v(x) - \int u'(x)v(x) \, dx$
+
+The strategy is to choose $u$ and $dv$ so that $\int v \, du$ is easier to evaluate than the original integral.
+\end{keyformula}
+
+\subsection{Choosing $u$ and $dv$: The LIATE Rule}
+
+\begin{keyformula}
+Priority for choosing $u$ (choose the first that appears):
+\begin{itemize}
+    \item \textbf{L}ogarithmic functions: $\ln x, \log x$, etc.
+    \item \textbf{I}nverse trig functions: $\arcsin x, \arctan x$, etc.
+    \item \textbf{A}lgebraic functions: $x^n, \sqrt{x}$, etc.
+    \item \textbf{T}rigonometric functions: $\sin x, \cos x$, etc.
+    \item \textbf{E}xponential functions: $e^x, a^x$, etc.
+\end{itemize}
+\end{keyformula}
+
+\begin{example}
+Find $\int x e^x \, dx$.
+
+Using LIATE: $u = x$ (algebraic), $dv = e^x dx$ (exponential).
+
+Then:
+\begin{align}
+u &= x \Rightarrow du = dx\\
+dv &= e^x dx \Rightarrow v = e^x
+\end{align}
+
+Applying the formula:
+\begin{align}
+\int x e^x \, dx &= uv - \int v \, du\\
+&= x \cdot e^x - \int e^x \, dx\\
+&= xe^x - e^x + C\\
+&= e^x(x - 1) + C
+\end{align}
+\end{example}
+
+\begin{example}
+Find $\int x^2 \sin x \, dx$.
+
+Using LIATE: $u = x^2$ (algebraic), $dv = \sin x \, dx$ (trigonometric).
+
+\begin{align}
+u &= x^2 \Rightarrow du = 2x \, dx\\
+dv &= \sin x \, dx \Rightarrow v = -\cos x
+\end{align}
+
+Applying the formula:
+\begin{align}
+\int x^2 \sin x \, dx &= x^2(-\cos x) - \int (-\cos x)(2x) \, dx\\
+&= -x^2 \cos x + 2\int x \cos x \, dx
+\end{align}
+
+We need to apply integration by parts again to $\int x \cos x \, dx$:
+
+For $\int x \cos x \, dx$: $u = x$, $dv = \cos x \, dx$
+\begin{align}
+u &= x \Rightarrow du = dx\\
+dv &= \cos x \, dx \Rightarrow v = \sin x
+\end{align}
+
+So: $\int x \cos x \, dx = x \sin x - \int \sin x \, dx = x \sin x + \cos x + C_1$
+
+Therefore:
+\begin{align}
+\int x^2 \sin x \, dx &= -x^2 \cos x + 2(x \sin x + \cos x) + C\\
+&= -x^2 \cos x + 2x \sin x + 2\cos x + C\\
+&= \cos x(2 - x^2) + 2x \sin x + C
+\end{align}
+\end{example}
+
+\subsection{Logarithmic Integration}
+
+\begin{example}
+Find $\int \ln x \, dx$.
+
+This looks like it doesn't fit the pattern, but we can write it as $\int 1 \cdot \ln x \, dx$.
+
+Using LIATE: $u = \ln x$ (logarithmic), $dv = dx$ (constant).
+
+\begin{align}
+u &= \ln x \Rightarrow du = \frac{1}{x} dx\\
+dv &= dx \Rightarrow v = x
+\end{align}
+
+Applying the formula:
+\begin{align}
+\int \ln x \, dx &= x \ln x - \int x \cdot \frac{1}{x} \, dx\\
+&= x \ln x - \int 1 \, dx\\
+&= x \ln x - x + C\\
+&= x(\ln x - 1) + C
+\end{align}
+\end{example}
+
+\subsection{Definite Integrals}
+
+\begin{example}
+Evaluate $\int_0^1 xe^{2x} \, dx$.
+
+Using integration by parts: $u = x$, $dv = e^{2x} dx$
+
+\begin{align}
+u &= x \Rightarrow du = dx\\
+dv &= e^{2x} dx \Rightarrow v = \frac{1}{2}e^{2x}
+\end{align}
+
+For the indefinite integral:
+\begin{align}
+\int xe^{2x} \, dx &= x \cdot \frac{1}{2}e^{2x} - \int \frac{1}{2}e^{2x} \, dx\\
+&= \frac{x}{2}e^{2x} - \frac{1}{2} \cdot \frac{1}{2}e^{2x} + C\\
+&= \frac{x}{2}e^{2x} - \frac{1}{4}e^{2x} + C\\
+&= \frac{e^{2x}}{4}(2x - 1) + C
+\end{align}
+
+Now evaluate the definite integral:
+\begin{align}
+\int_0^1 xe^{2x} \, dx &= \left[\frac{e^{2x}}{4}(2x - 1)\right]_0^1\\
+&= \frac{e^2}{4}(2 - 1) - \frac{e^0}{4}(0 - 1)\\
+&= \frac{e^2}{4} - \frac{1}{4}(-1)\\
+&= \frac{e^2}{4} + \frac{1}{4} = \frac{e^2 + 1}{4}
+\end{align}
+\end{example}
+
+\subsection{Cyclic Integration}
+
+Sometimes integration by parts leads back to the original integral.
+
+\begin{example}
+Find $\int e^x \sin x \, dx$.
+
+Let $u = \sin x$, $dv = e^x dx$:
+\begin{align}
+u &= \sin x \Rightarrow du = \cos x \, dx\\
+dv &= e^x dx \Rightarrow v = e^x
+\end{align}
+
+So: $\int e^x \sin x \, dx = e^x \sin x - \int e^x \cos x \, dx$
+
+Now we need $\int e^x \cos x \, dx$. Let $u = \cos x$, $dv = e^x dx$:
+\begin{align}
+u &= \cos x \Rightarrow du = -\sin x \, dx\\
+dv &= e^x dx \Rightarrow v = e^x
+\end{align}
+
+So: $\int e^x \cos x \, dx = e^x \cos x - \int e^x(-\sin x) \, dx = e^x \cos x + \int e^x \sin x \, dx$
+
+Substituting back:
+\begin{align}
+\int e^x \sin x \, dx &= e^x \sin x - (e^x \cos x + \int e^x \sin x \, dx)\\
+\int e^x \sin x \, dx &= e^x \sin x - e^x \cos x - \int e^x \sin x \, dx
+\end{align}
+
+Adding $\int e^x \sin x \, dx$ to both sides:
+\begin{align}
+2\int e^x \sin x \, dx &= e^x \sin x - e^x \cos x\\
+\int e^x \sin x \, dx &= \frac{e^x(\sin x - \cos x)}{2} + C
+\end{align}
+\end{example}
+
+\subsection{Practice Problems - Chapter 15}
+
+\textbf{Problem 15.1:} Find $\int x \cos x \, dx$.
+
+\textbf{Problem 15.2:} Evaluate $\int x^2 e^x \, dx$.
+
+\textbf{Problem 15.3:} Find $\int x \ln x \, dx$.
+
+\textbf{Problem 15.4:} Evaluate $\int_0^{\pi/2} x \sin x \, dx$.
+
+\textbf{Problem 15.5:} Find $\int e^{2x} \cos x \, dx$.
+
+\chapter{Multiple Integrals}
+
+\section{Understanding Multiple Integrals}
+
+\begin{intuition}
+While single integrals compute areas under curves (in 2D), double integrals compute volumes under surfaces (in 3D). Triple integrals extend this to compute "4D volumes" or masses in 3D regions.
+
+Think of double integrals as:
+\begin{itemize}
+    \item Volume under a surface $z = f(x,y)$ above a region in the xy-plane
+    \item Mass of a thin sheet with density function $\rho(x,y)$
+    \item Total charge in a region with charge density $\sigma(x,y)$
+\end{itemize}
+\end{intuition}
+
+\subsection{Double Integrals over Rectangular Regions}
+
+\begin{keyformula}
+For a function $f(x,y)$ over a rectangle $R = [a,b] \times [c,d]$:
+
+$\iint_R f(x,y) \, dA = \int_c^d \int_a^b f(x,y) \, dx \, dy = \int_a^b \int_c^d f(x,y) \, dy \, dx$
+
+The order of integration can often be chosen for convenience.
+\end{keyformula}
+
+\begin{example}
+Evaluate $\iint_R (2x + 3y) \, dA$ where $R = [0,2] \times [1,3]$.
+
+\begin{align}
+\iint_R (2x + 3y) \, dA &= \int_1^3 \int_0^2 (2x + 3y) \, dx \, dy\\
+&= \int_1^3 \left[ \int_0^2 (2x + 3y) \, dx \right] dy
+\end{align}
+
+First, integrate with respect to $x$ (treating $y$ as constant):
+\begin{align}
+\int_0^2 (2x + 3y) \, dx &= \left[ x^2 + 3xy \right]_0^2\\
+&= (4 + 6y) - 0 = 4 + 6y
+\end{align}
+
+Now integrate with respect to $y$:
+\begin{align}
+\int_1^3 (4 + 6y) \, dy &= \left[ 4y + 3y^2 \right]_1^3\\
+&= (12 + 27) - (4 + 3) = 39 - 7 = 32
+\end{align}
+\end{example}
+
+\begin{example}
+Find the volume under $z = x^2 + y^2$ over the rectangle $[0,1] \times [0,2]$.
+
+\begin{align}
+V &= \iint_R (x^2 + y^2) \, dA = \int_0^2 \int_0^1 (x^2 + y^2) \, dx \, dy
+\end{align}
+
+Integrate with respect to $x$ first:
+\begin{align}
+\int_0^1 (x^2 + y^2) \, dx &= \left[ \frac{x^3}{3} + xy^2 \right]_0^1\\
+&= \frac{1}{3} + y^2
+\end{align}
+
+Now integrate with respect to $y$:
+\begin{align}
+\int_0^2 \left( \frac{1}{3} + y^2 \right) dy &= \left[ \frac{y}{3} + \frac{y^3}{3} \right]_0^2\\
+&= \frac{2}{3} + \frac{8}{3} = \frac{10}{3}
+\end{align}
+\end{example}
+
+\subsection{Double Integrals over General Regions}
+
+For non-rectangular regions, we need to determine the limits of integration carefully.
+
+\begin{keyformula}
+For a region $D$ described as:
+- $a \leq x \leq b$ and $g_1(x) \leq y \leq g_2(x)$:
+$\iint_D f(x,y) \, dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y) \, dy \, dx$
+
+- $c \leq y \leq d$ and $h_1(y) \leq x \leq h_2(y)$:
+$\iint_D f(x,y) \, dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x,y) \, dx \, dy$
+\end{keyformula}
+
+\begin{example}
+Find the area of the region bounded by $y = x^2$ and $y = 2x$.
+
+First, find intersection points: $x^2 = 2x \Rightarrow x^2 - 2x = 0 \Rightarrow x(x-2) = 0$
+So $x = 0$ or $x = 2$.
+
+The region is: $0 \leq x \leq 2$ and $x^2 \leq y \leq 2x$.
+
+\begin{align}
+\text{Area} &= \iint_D 1 \, dA = \int_0^2 \int_{x^2}^{2x} 1 \, dy \, dx\\
+&= \int_0^2 [y]_{x^2}^{2x} \, dx\\
+&= \int_0^2 (2x - x^2) \, dx\\
+&= \left[ x^2 - \frac{x^3}{3} \right]_0^2\\
+&= 4 - \frac{8}{3} = \frac{4}{3}
+\end{align}
+\end{example}
+
+\subsection{Changing the Order of Integration}
+
+Sometimes it's easier to integrate in a different order.
+
+\begin{example}
+Evaluate $\int_0^1 \int_x^1 e^{y^2} \, dy \, dx$.
+
+The function $e^{y^2}$ has no elementary antiderivative with respect to $y$, so let's change the order.
+
+The region is described by: $0 \leq x \leq 1$ and $x \leq y \leq 1$.
+
+We can redescribe this as: $0 \leq y \leq 1$ and $0 \leq x \leq y$.
+
+\begin{align}
+\int_0^1 \int_x^1 e^{y^2} \, dy \, dx &= \int_0^1 \int_0^y e^{y^2} \, dx \, dy\\
+&= \int_0^1 e^{y^2} [x]_0^y \, dy\\
+&= \int_0^1 ye^{y^2} \, dy
+\end{align}
+
+Now we can use substitution: let $u = y^2$, so $du = 2y \, dy$:
+\begin{align}
+\int_0^1 ye^{y^2} \, dy &= \frac{1}{2} \int_0^1 e^u \, du\\
+&= \frac{1}{2}[e^u]_0^1\\
+&= \frac{1}{2}(e - 1)
+\end{align}
+\end{example}
+
+\subsection{Triple Integrals}
+
+\begin{keyformula}
+For a function $f(x,y,z)$ over a region $E$ in 3D space:
+$\iiint_E f(x,y,z) \, dV = \int \int \int f(x,y,z) \, dx \, dy \, dz$
+
+The order of integration depends on how the region is described.
+\end{keyformula}
+
+\begin{example}
+Find the volume of the region bounded by $z = 0$, $z = 4-x^2-y^2$, and lying above the disk $x^2 + y^2 \leq 1$.
+
+The region can be described as:
+- $-1 \leq x \leq 1$
+- $-\sqrt{1-x^2} \leq y \leq \sqrt{1-x^2}$
+- $0 \leq z \leq 4-x^2-y^2$
+
+\begin{align}
+V &= \iiint_E 1 \, dV\\
+&= \int_{-1}^1 \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} \int_0^{4-x^2-y^2} 1 \, dz \, dy \, dx\\
+&= \int_{-1}^1 \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} (4-x^2-y^2) \, dy \, dx
+\end{align}
+
+This integral is easier in cylindrical coordinates, but proceeding with Cartesian:
+
+Due to symmetry about the x-axis:
+\begin{align}
+V &= 2\int_{-1}^1 \int_0^{\sqrt{1-x^2}} (4-x^2-y^2) \, dy \, dx\\
+&= 2\int_{-1}^1 \left[ (4-x^2)y - \frac{y^3}{3} \right]_0^{\sqrt{1-x^2}} dx\\
+&= 2\int_{-1}^1 \left[ (4-x^2)\sqrt{1-x^2} - \frac{(1-x^2)^{3/2}}{3} \right] dx
+\end{align}
+
+This integral can be evaluated using trigonometric substitution, yielding $V = \frac{15\pi}{2}$.
+\end{example}
+
+\subsection{Applications of Multiple Integrals}
+
+\begin{example}[Center of Mass]
+Find the center of mass of a lamina occupying the region bounded by $y = x^2$ and $y = 4$ with density $\rho(x,y) = y$.
+
+The region is: $-2 \leq x \leq 2$ and $x^2 \leq y \leq 4$.
+
+First, find the mass:
+\begin{align}
+m &= \iint_D \rho(x,y) \, dA = \int_{-2}^2 \int_{x^2}^4 y \, dy \, dx\\
+&= \int_{-2}^2 \left[ \frac{y^2}{2} \right]_{x^2}^4 dx\\
+&= \int_{-2}^2 \left( 8 - \frac{x^4}{2} \right) dx\\
+&= \left[ 8x - \frac{x^5}{10} \right]_{-2}^2\\
+&= \left( 16 - \frac{32}{10} \right) - \left( -16 + \frac{32}{10} \right)\\
+&= 32 - \frac{64}{10} = \frac{256}{10} = \frac{128}{5}
+\end{align}
+
+The x-coordinate of the center of mass:
+\begin{align}
+\bar{x} &= \frac{1}{m} \iint_D x\rho(x,y) \, dA = \frac{1}{m} \int_{-2}^2 \int_{x^2}^4 xy \, dy \, dx
+\end{align}
+
+By symmetry (the region and density are symmetric about the y-axis), $\bar{x} = 0$.
+
+The y-coordinate of the center of mass:
+\begin{align}
+\bar{y} &= \frac{1}{m} \iint_D y\rho(x,y) \, dA = \frac{1}{m} \int_{-2}^2 \int_{x^2}^4 y^2 \, dy \, dx\\
+&= \frac{1}{m} \int_{-2}^2 \left[ \frac{y^3}{3} \right]_{x^2}^4 dx\\
+&= \frac{1}{m} \int_{-2}^2 \left( \frac{64}{3} - \frac{x^6}{3} \right) dx\\
+&= \frac{1}{m} \left[ \frac{64x}{3} - \frac{x^7}{21} \right]_{-2}^2\\
+&= \frac{1}{m} \left( \frac{128}{3} - \frac{128}{21} - \left( -\frac{128}{3} + \frac{128}{21} \right) \right)\\
+&= \frac{1}{m} \left( \frac{256}{3} - \frac{256}{21} \right) = \frac{1}{m} \cdot \frac{256 \cdot 7 - 256}{21}\\
+&= \frac{1}{m} \cdot \frac{256 \cdot 6}{21} = \frac{1536}{21m} = \frac{1536}{21 \cdot \frac{128}{5}} = \frac{1536 \cdot 5}{21 \cdot 128} = \frac{60}{21} = \frac{20}{7}
+\end{align}
+
+Therefore, the center of mass is at $\left( 0, \frac{20}{7} \right)$.
+\end{example}
+
+\subsection{Practice Problems - Chapter 16}
+
+\textbf{Problem 16.1:} Evaluate $\iint_R xy \, dA$ where $R = [1,3] \times [0,2]$.
+
+\textbf{Problem 16.2:} Find the volume under $z = x + y$ over the region bounded by $x = 0$, $y = 0$, and $x + y = 2$.
+
+\textbf{Problem 16.3:} Evaluate $\int_0^2 \int_{y/2}^1 e^{x^2} \, dx \, dy$ by changing the order of integration.
+
+\textbf{Problem 16.4:} Find the volume of the solid bounded by $z = x^2 + y^2$ and $z = 8 - x^2 - y^2$.
+
+\textbf{Problem 16.5:} Find the center of mass of the region bounded by $y = x$ and $y = x^2$ with constant density $\rho = 1$.
+
+\chapter*{Solutions}
+\addcontentsline{toc}{chapter}{Solutions}
+
+\section*{Chapter 1 Solutions}
+
+\begin{solution}
+\textbf{Problem 1.1:} Find the derivative of $f(x) = 5x^3 - 2x^2 + 8x - 3$.
+
+Using the power rule for each term:
+\begin{align}
+f'(x) &= 5 \cdot 3x^2 - 2 \cdot 2x^1 + 8 \cdot 1x^0 - 0\\
+&= 15x^2 - 4x + 8
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 1.2:} Find $\frac{dy}{dx}$ if $y = 4x^5 + 3x^4 - x^2 + 7$.
+
+\begin{align}
+\frac{dy}{dx} &= 4 \cdot 5x^4 + 3 \cdot 4x^3 - 1 \cdot 2x^1 + 0\\
+&= 20x^4 + 12x^3 - 2x
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 1.3:} Find the derivative of $g(t) = 2t^6 - 5t^3 + 10t - 1$.
+
+\begin{align}
+g'(t) &= 2 \cdot 6t^5 - 5 \cdot 3t^2 + 10 \cdot 1t^0 - 0\\
+&= 12t^5 - 15t^2 + 10
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 1.4:} If $h(x) = x^4 - 3x^3 + 2x - 5$, find $h'(x)$.
+
+\begin{align}
+h'(x) &= 4x^3 - 3 \cdot 3x^2 + 2 - 0\\
+&= 4x^3 - 9x^2 + 2
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 1.5:} Find the derivative of $f(x) = 7x^2 - 4x + 9$.
+
+\begin{align}
+f'(x) &= 7 \cdot 2x - 4 \cdot 1 + 0\\
+&= 14x - 4
+\end{align}
+\end{solution}
+
+\section*{Chapter 2 Solutions}
+
+\begin{solution}
+\textbf{Problem 2.1:} Find the derivative of $y = (4x^2 - 3x + 1)^3$ using the chain rule.
+
+Let $u = 4x^2 - 3x + 1$, so $y = u^3$.
+\begin{align}
+\frac{du}{dx} &= 8x - 3\\
+\frac{dy}{du} &= 3u^2\\
+\frac{dy}{dx} &= \frac{dy}{du} \cdot \frac{du}{dx} = 3u^2(8x - 3)\\
+&= 3(4x^2 - 3x + 1)^2(8x - 3)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 2.2:} Find the derivative of $f(x) = (x + 2)(3x^2 - 1)$ using the product rule.
+
+Let $u(x) = x + 2$ and $v(x) = 3x^2 - 1$.
+\begin{align}
+u'(x) &= 1\\
+v'(x) &= 6x\\
+f'(x) &= u'(x)v(x) + u(x)v'(x)\\
+&= 1 \cdot (3x^2 - 1) + (x + 2) \cdot 6x\\
+&= 3x^2 - 1 + 6x^2 + 12x\\
+&= 9x^2 + 12x - 1
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 2.3:} Find the derivative of $g(x) = \frac{2x + 5}{x^2 - 1}$ using the quotient rule.
+
+Let $f(x) = 2x + 5$ and $h(x) = x^2 - 1$.
+\begin{align}
+f'(x) &= 2\\
+h'(x) &= 2x\\
+g'(x) &= \frac{f'(x)h(x) - f(x)h'(x)}{[h(x)]^2}\\
+&= \frac{2(x^2 - 1) - (2x + 5)(2x)}{(x^2 - 1)^2}\\
+&= \frac{2x^2 - 2 - 4x^2 - 10x}{(x^2 - 1)^2}\\
+&= \frac{-2x^2 - 10x - 2}{(x^2 - 1)^2}\\
+&= \frac{-2(x^2 + 5x + 1)}{(x^2 - 1)^2}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 2.4:} Find $\frac{dy}{dx}$ if $y = x^2(x - 3)^2$.
+
+Using the product rule with $u = x^2$ and $v = (x - 3)^2$:
+\begin{align}
+u' &= 2x\\
+v' &= 2(x - 3) \cdot 1 = 2(x - 3)\\
+\frac{dy}{dx} &= u'v + uv'\\
+&= 2x(x - 3)^2 + x^2 \cdot 2(x - 3)\\
+&= 2x(x - 3)^2 + 2x^2(x - 3)\\
+&= 2x(x - 3)[(x - 3) + x]\\
+&= 2x(x - 3)(2x - 3)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 2.5:} Find the derivative of $h(t) = \frac{t^3}{2t + 1}$.
+
+Using the quotient rule with $f(t) = t^3$ and $g(t) = 2t + 1$:
+\begin{align}
+f'(t) &= 3t^2\\
+g'(t) &= 2\\
+h'(t) &= \frac{f'(t)g(t) - f(t)g'(t)}{[g(t)]^2}\\
+&= \frac{3t^2(2t + 1) - t^3(2)}{(2t + 1)^2}\\
+&= \frac{6t^3 + 3t^2 - 2t^3}{(2t + 1)^2}\\
+&= \frac{4t^3 + 3t^2}{(2t + 1)^2}\\
+&= \frac{t^2(4t + 3)}{(2t + 1)^2}
+\end{align}
+\end{solution}
+
+\section*{Chapter 3 Solutions}
+
+\begin{solution}
+\textbf{Problem 3.1:} Find the derivative of $f(x) = 4\sin x - 3\cos x + 2\tan x$.
+
+\begin{align}
+f'(x) &= 4\cos x - 3(-\sin x) + 2\sec^2 x\\
+&= 4\cos x + 3\sin x + 2\sec^2 x
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 3.2:} Find $\frac{dy}{dx}$ if $y = \sin(5x + 2)$.
+
+Using the chain rule:
+\begin{align}
+\frac{dy}{dx} &= \cos(5x + 2) \cdot \frac{d}{dx}[5x + 2]\\
+&= \cos(5x + 2) \cdot 5\\
+&= 5\cos(5x + 2)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 3.3:} Find the derivative of $g(x) = x\cos x$.
+
+Using the product rule:
+\begin{align}
+g'(x) &= \frac{d}{dx}[x] \cdot \cos x + x \cdot \frac{d}{dx}[\cos x]\\
+&= 1 \cdot \cos x + x \cdot (-\sin x)\\
+&= \cos x - x\sin x
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 3.4:} Find the derivative of $h(t) = \frac{\sin t}{1 + \cos t}$.
+
+Using the quotient rule:
+\begin{align}
+h'(t) &= \frac{(1 + \cos t) \cdot \cos t - \sin t \cdot (-\sin t)}{(1 + \cos t)^2}\\
+&= \frac{\cos t + \cos^2 t + \sin^2 t}{(1 + \cos t)^2}\\
+&= \frac{\cos t + (\cos^2 t + \sin^2 t)}{(1 + \cos t)^2}\\
+&= \frac{\cos t + 1}{(1 + \cos t)^2}\\
+&= \frac{1}{1 + \cos t}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 3.5:} Find $\frac{d}{dx}[\cos^2 x]$.
+
+Using the chain rule with $u = \cos x$, so we have $u^2$:
+\begin{align}
+\frac{d}{dx}[\cos^2 x] &= 2\cos x \cdot \frac{d}{dx}[\cos x]\\
+&= 2\cos x \cdot (-\sin x)\\
+&= -2\sin x \cos x\\
+&= -\sin(2x)
+\end{align}
+\end{solution}
+
+\section*{Chapter 4 Solutions}
+
+\begin{solution}
+\textbf{Problem 4.1:} Find the derivative of $f(x) = 5e^x - 3^x$.
+
+\begin{align}
+f'(x) &= 5 \cdot e^x - 3^x \ln 3\\
+&= 5e^x - 3^x \ln 3
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 4.2:} Find $\frac{dy}{dx}$ if $y = e^{2x - 1}$.
+
+Using the chain rule:
+\begin{align}
+\frac{dy}{dx} &= e^{2x - 1} \cdot \frac{d}{dx}[2x - 1]\\
+&= e^{2x - 1} \cdot 2\\
+&= 2e^{2x - 1}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 4.3:} Find the derivative of $g(t) = te^t$.
+
+Using the product rule:
+\begin{align}
+g'(t) &= \frac{d}{dt}[t] \cdot e^t + t \cdot \frac{d}{dt}[e^t]\\
+&= 1 \cdot e^t + t \cdot e^t\\
+&= e^t + te^t\\
+&= e^t(1 + t)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 4.4:} Find the derivative of $h(x) = \frac{e^x}{x + 1}$.
+
+Using the quotient rule:
+\begin{align}
+h'(x) &= \frac{(x + 1) \cdot e^x - e^x \cdot 1}{(x + 1)^2}\\
+&= \frac{e^x(x + 1) - e^x}{(x + 1)^2}\\
+&= \frac{e^x[(x + 1) - 1]}{(x + 1)^2}\\
+&= \frac{xe^x}{(x + 1)^2}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 4.5:} Find the derivative of $f(x) = e^{\sin x}$.
+
+Using the chain rule:
+\begin{align}
+f'(x) &= e^{\sin x} \cdot \frac{d}{dx}[\sin x]\\
+&= e^{\sin x} \cdot \cos x\\
+&= \cos x \cdot e^{\sin x}
+\end{align}
+\end{solution}
+
+\section*{Chapter 5 Solutions}
+
+\begin{solution}
+\textbf{Problem 5.1:} Find the derivative of $f(x) = 2\ln x - \log_3 x$.
+
+\begin{align}
+f'(x) &= 2 \cdot \frac{1}{x} - \frac{1}{x \ln 3}\\
+&= \frac{2}{x} - \frac{1}{x \ln 3}\\
+&= \frac{1}{x}\left(2 - \frac{1}{\ln 3}\right)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 5.2:} Find $\frac{dy}{dx}$ if $y = \ln(3x^2 - 2x + 1)$.
+
+Using the chain rule:
+\begin{align}
+\frac{dy}{dx} &= \frac{1}{3x^2 - 2x + 1} \cdot \frac{d}{dx}[3x^2 - 2x + 1]\\
+&= \frac{1}{3x^2 - 2x + 1} \cdot (6x - 2)\\
+&= \frac{6x - 2}{3x^2 - 2x + 1}\\
+&= \frac{2(3x - 1)}{3x^2 - 2x + 1}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 5.3:} Find the derivative of $g(x) = x^2 \ln x$.
+
+Using the product rule:
+\begin{align}
+g'(x) &= \frac{d}{dx}[x^2] \cdot \ln x + x^2 \cdot \frac{d}{dx}[\ln x]\\
+&= 2x \cdot \ln x + x^2 \cdot \frac{1}{x}\\
+&= 2x \ln x + x\\
+&= x(2\ln x + 1)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 5.4:} Use logarithmic differentiation to find the derivative of $h(x) = (x + 1)^x$.
+
+Taking the natural log of both sides:
+\begin{align}
+\ln h(x) &= \ln[(x + 1)^x] = x \ln(x + 1)
+\end{align}
+
+Differentiating both sides:
+\begin{align}
+\frac{h'(x)}{h(x)} &= \frac{d}{dx}[x \ln(x + 1)]
+\end{align}
+
+Using the product rule on the right side:
+\begin{align}
+\frac{h'(x)}{h(x)} &= 1 \cdot \ln(x + 1) + x \cdot \frac{1}{x + 1}\\
+&= \ln(x + 1) + \frac{x}{x + 1}
+\end{align}
+
+Therefore:
+\begin{align}
+h'(x) &= h(x) \left[\ln(x + 1) + \frac{x}{x + 1}\right]\\
+&= (x + 1)^x \left[\ln(x + 1) + \frac{x}{x + 1}\right]
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 5.5:} Find the derivative of $f(x) = \frac{\ln x}{x^2}$.
+
+Using the quotient rule:
+\begin{align}
+f'(x) &= \frac{x^2 \cdot \frac{1}{x} - \ln x \cdot 2x}{(x^2)^2}\\
+&= \frac{x - 2x\ln x}{x^4}\\
+&= \frac{x(1 - 2\ln x)}{x^4}\\
+&= \frac{1 - 2\ln x}{x^3}
+\end{align}
+\end{solution}
+
+\section*{Chapter 6 Solutions}
+
+\begin{solution}
+\textbf{Problem 6.1:} Find the second derivative of $f(x) = 2x^5 - 3x^4 + x^2 - 7$.
+
+First derivative:
+\begin{align}
+f'(x) &= 10x^4 - 12x^3 + 2x
+\end{align}
+
+Second derivative:
+\begin{align}
+f''(x) &= 40x^3 - 36x^2 + 2
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 6.2:} Find $\frac{d^2y}{dx^2}$ if $y = \sin(2x)$.
+
+First derivative:
+\begin{align}
+\frac{dy}{dx} &= \cos(2x) \cdot 2 = 2\cos(2x)
+\end{align}
+
+Second derivative:
+\begin{align}
+\frac{d^2y}{dx^2} &= 2 \cdot (-\sin(2x)) \cdot 2 = -4\sin(2x)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 6.3:} Find the second derivative of $g(x) = xe^x$.
+
+First derivative (using product rule):
+\begin{align}
+g'(x) &= 1 \cdot e^x + x \cdot e^x = e^x + xe^x = e^x(1 + x)
+\end{align}
+
+Second derivative (using product rule again):
+\begin{align}
+g''(x) &= e^x \cdot 1 + (1 + x) \cdot e^x\\
+&= e^x + e^x(1 + x)\\
+&= e^x[1 + (1 + x)]\\
+&= e^x(2 + x)
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 6.4:} Determine the concavity of $h(x) = x^4 - 4x^3$.
+
+First derivative:
+\begin{align}
+h'(x) &= 4x^3 - 12x^2 = 4x^2(x - 3)
+\end{align}
+
+Second derivative:
+\begin{align}
+h''(x) &= 12x^2 - 24x = 12x(x - 2)
+\end{align}
+
+To find where concavity changes, set $h''(x) = 0$:
+$12x(x - 2) = 0$, so $x = 0$ or $x = 2$.
+
+Testing intervals:
+\begin{itemize}
+    \item For $x < 0$: $h''(-1) = 12(-1)(-3) = 36 > 0$ (concave up)
+    \item For $0 < x < 2$: $h''(1) = 12(1)(-1) = -12 < 0$ (concave down)
+    \item For $x > 2$: $h''(3) = 12(3)(1) = 36 > 0$ (concave up)
+\end{itemize}
+
+Therefore: concave up on $(-\infty, 0)$ and $(2, \infty)$; concave down on $(0, 2)$.
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 6.5:} Find all inflection points of $f(x) = x^3 - 3x^2 + 2$.
+
+First derivative:
+\begin{align}
+f'(x) &= 3x^2 - 6x
+\end{align}
+
+Second derivative:
+\begin{align}
+f''(x) &= 6x - 6 = 6(x - 1)
+\end{align}
+
+Set $f''(x) = 0$: $6(x - 1) = 0$, so $x = 1$.
+
+Check that concavity changes at $x = 1$:
+\begin{itemize}
+    \item For $x < 1$: $f''(0) = -6 < 0$ (concave down)
+    \item For $x > 1$: $f''(2) = 6 > 0$ (concave up)
+\end{itemize}
+
+Since concavity changes at $x = 1$, there's an inflection point at $(1, f(1))$.
+$f(1) = 1 - 3 + 2 = 0$.
+
+The inflection point is $(1, 0)$.
+\end{solution}
+
+\section*{Chapter 7 Solutions}
+
+\begin{solution}
+\textbf{Problem 7.1:} Find all critical points of $f(x) = x^4 - 4x^3 + 6x^2$.
+
+First derivative:
+\begin{align}
+f'(x) &= 4x^3 - 12x^2 + 12x = 4x(x^2 - 3x + 3)
+\end{align}
+
+Set $f'(x) = 0$: $4x(x^2 - 3x + 3) = 0$
+
+This gives us $x = 0$ or $x^2 - 3x + 3 = 0$.
+
+For the quadratic: $x = \frac{3 \pm \sqrt{9 - 12}}{2} = \frac{3 \pm \sqrt{-3}}{2}$
+
+Since the discriminant is negative, there are no real solutions from the quadratic.
+
+Therefore, the only critical point is $x = 0$.
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 7.2:} Use the First Derivative Test to classify the critical points of $g(x) = 2x^3 - 9x^2 + 12x$.
+
+First derivative:
+\begin{align}
+g'(x) &= 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x - 1)(x - 2)
+\end{align}
+
+Critical points: $x = 1$ and $x = 2$.
+
+Testing intervals:
+\begin{itemize}
+    \item For $x < 1$: $g'(0) = 12 > 0$
+    \item For $1 < x < 2$: $g'(1.5) = 6(0.5)(-0.5) = -1.5 < 0$
+    \item For $x > 2$: $g'(3) = 6(2)(1) = 12 > 0$
+\end{itemize}
+
+At $x = 1$: $g'$ changes from $+$ to $-$, so $g(1) = 2 - 9 + 12 = 5$ is a local maximum.
+At $x = 2$: $g'$ changes from $-$ to $+$, so $g(2) = 16 - 36 + 24 = 4$ is a local minimum.
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 7.3:} Find the absolute extrema of $h(x) = x^2 - 4x + 3$ on $[0, 5]$.
+
+First derivative:
+\begin{align}
+h'(x) &= 2x - 4
+\end{align}
+
+Set $h'(x) = 0$: $2x - 4 = 0$, so $x = 2$.
+
+Since $2 \in [0, 5]$, we evaluate $h$ at the critical point and endpoints:
+\begin{align}
+h(0) &= 0 - 0 + 3 = 3\\
+h(2) &= 4 - 8 + 3 = -1\\
+h(5) &= 25 - 20 + 3 = 8
+\end{align}
+
+Absolute maximum: $h(5) = 8$
+Absolute minimum: $h(2) = -1$
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 7.4:} Find all critical points of $f(x) = xe^{-x}$.
+
+First derivative (using product rule):
+\begin{align}
+f'(x) &= 1 \cdot e^{-x} + x \cdot (-e^{-x}) = e^{-x} - xe^{-x} = e^{-x}(1 - x)
+\end{align}
+
+Set $f'(x) = 0$: $e^{-x}(1 - x) = 0$
+
+Since $e^{-x} > 0$ for all $x$, we need $1 - x = 0$, so $x = 1$.
+
+The critical point is $x = 1$.
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 7.5:} Find the absolute extrema of $g(x) = \sin x + \cos x$ on $[0, 2\pi]$.
+
+First derivative:
+\begin{align}
+g'(x) &= \cos x - \sin x
+\end{align}
+
+Set $g'(x) = 0$: $\cos x - \sin x = 0$, so $\cos x = \sin x$, which means $\tan x = 1$.
+
+On $[0, 2\pi]$, this occurs at $x = \frac{\pi}{4}$ and $x = \frac{5\pi}{4}$.
+
+Evaluate $g$ at critical points and endpoints:
+\begin{align}
+g(0) &= \sin 0 + \cos 0 = 0 + 1 = 1\\
+g\left(\frac{\pi}{4}\right) &= \sin\frac{\pi}{4} + \cos\frac{\pi}{4} = \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} = \sqrt{2}\\
+g\left(\frac{5\pi}{4}\right) &= \sin\frac{5\pi}{4} + \cos\frac{5\pi}{4} = -\frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2} = -\sqrt{2}\\
+g(2\pi) &= \sin 2\pi + \cos 2\pi = 0 + 1 = 1
+\end{align}
+
+Absolute maximum: $g\left(\frac{\pi}{4}\right) = \sqrt{2}$
+Absolute minimum: $g\left(\frac{5\pi}{4}\right) = -\sqrt{2}$
+\end{solution}
+
+\section*{Chapter 8 Solutions}
+
+\begin{solution}
+\textbf{Problem 8.1:} Evaluate $\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$.
+
+This is a $\frac{0}{0}$ indeterminate form. We can factor:
+\begin{align}
+\lim_{x \to 1} \frac{x^2 - 1}{x - 1} &= \lim_{x \to 1} \frac{(x - 1)(x + 1)}{x - 1}\\
+&= \lim_{x \to 1} (x + 1) = 1 + 1 = 2
+\end{align}
+
+Alternatively, using L'Hôpital's Rule:
+\begin{align}
+\lim_{x \to 1} \frac{x^2 - 1}{x - 1} &= \lim_{x \to 1} \frac{2x}{1} = 2
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 8.2:} Use L'Hôpital's Rule to find $\lim_{x \to 0} \frac{1 - \cos x}{x^2}$.
+
+This is a $\frac{0}{0}$ form. Apply L'Hôpital's Rule:
+\begin{align}
+\lim_{x \to 0} \frac{1 - \cos x}{x^2} &= \lim_{x \to 0} \frac{\sin x}{2x}
+\end{align}
+
+Still $\frac{0}{0}$, so apply L'Hôpital's Rule again:
+\begin{align}
+\lim_{x \to 0} \frac{\sin x}{2x} &= \lim_{x \to 0} \frac{\cos x}{2} = \frac{1}{2}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 8.3:} Evaluate $\lim_{x \to \infty} \frac{\ln x}{x}$.
+
+This is a $\frac{\infty}{\infty}$ form. Apply L'Hôpital's Rule:
+\begin{align}
+\lim_{x \to \infty} \frac{\ln x}{x} &= \lim_{x \to \infty} \frac{1/x}{1} = \lim_{x \to \infty} \frac{1}{x} = 0
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 8.4:} Find $\lim_{x \to 0^+} x^2 \ln x$.
+
+This is a $0 \cdot (-\infty)$ form. Rewrite as:
+\begin{align}
+\lim_{x \to 0^+} x^2 \ln x &= \lim_{x \to 0^+} \frac{\ln x}{1/x^2}
+\end{align}
+
+This is now $\frac{-\infty}{\infty}$. Apply L'Hôpital's Rule:
+\begin{align}
+\lim_{x \to 0^+} \frac{\ln x}{1/x^2} &= \lim_{x \to 0^+} \frac{1/x}{-2/x^3} = \lim_{x \to 0^+} \frac{x^3}{-2x} = \lim_{x \to 0^+} \frac{x^2}{-2} = 0
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 8.5:} Evaluate $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$.
+
+This is a $\frac{0}{0}$ form. Apply L'Hôpital's Rule:
+\begin{align}
+\lim_{x \to 0} \frac{e^x - 1 - x}{x^2} &= \lim_{x \to 0} \frac{e^x - 1}{2x}
+\end{align}
+
+Still $\frac{0}{0}$, so apply L'Hôpital's Rule again:
+\begin{align}
+\lim_{x \to 0} \frac{e^x - 1}{2x} &= \lim_{x \to 0} \frac{e^x}{2} = \frac{1}{2}
+\end{align}
+\end{solution}
+
+\section*{Chapter 9 Solutions}
+
+\begin{solution}
+\textbf{Problem 9.1:} Find $\int (4x^3 - 6x^2 + 2x - 5) \, dx$.
+
+\begin{align}
+\int (4x^3 - 6x^2 + 2x - 5) \, dx &= 4 \cdot \frac{x^4}{4} - 6 \cdot \frac{x^3}{3} + 2 \cdot \frac{x^2}{2} - 5x + C\\
+&= x^4 - 2x^3 + x^2 - 5x + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 9.2:} Evaluate $\int_0^2 (3x^2 + 2x - 1) \, dx$.
+
+First, find the antiderivative:
+\begin{align}
+\int (3x^2 + 2x - 1) \, dx &= x^3 + x^2 - x + C
+\end{align}
+
+Now evaluate the definite integral:
+\begin{align}
+\int_0^2 (3x^2 + 2x - 1) \, dx &= [x^3 + x^2 - x]_0^2\\
+&= (8 + 4 - 2) - (0 + 0 - 0)\\
+&= 10
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 9.3:} Find the area under $y = x^3 - x$ from $x = 0$ to $x = 2$.
+
+Note that $x^3 - x = x(x^2 - 1) = x(x - 1)(x + 1)$.
+The function is negative on $(0, 1)$ and positive on $(1, 2)$.
+
+For area, we need:
+\begin{align}
+\text{Area} &= \int_0^1 |x^3 - x| \, dx + \int_1^2 |x^3 - x| \, dx\\
+&= \int_0^1 -(x^3 - x) \, dx + \int_1^2 (x^3 - x) \, dx\\
+&= \int_0^1 (x - x^3) \, dx + \int_1^2 (x^3 - x) \, dx
+\end{align}
+
+For the first integral:
+\begin{align}
+\int_0^1 (x - x^3) \, dx &= \left[ \frac{x^2}{2} - \frac{x^4}{4} \right]_0^1 = \frac{1}{2} - \frac{1}{4} = \frac{1}{4}
+\end{align}
+
+For the second integral:
+\begin{align}
+\int_1^2 (x^3 - x) \, dx &= \left[ \frac{x^4}{4} - \frac{x^2}{2} \right]_1^2\\
+&= \left( 4 - 2 \right) - \left( \frac{1}{4} - \frac{1}{2} \right)\\
+&= 2 - \left( -\frac{1}{4} \right) = 2 + \frac{1}{4} = \frac{9}{4}
+\end{align}
+
+Total area = $\frac{1}{4} + \frac{9}{4} = \frac{10}{4} = \frac{5}{2}$
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 9.4:} Evaluate $\int_{-1}^1 (x^4 - x^2) \, dx$.
+
+\begin{align}
+\int_{-1}^1 (x^4 - x^2) \, dx &= \left[ \frac{x^5}{5} - \frac{x^3}{3} \right]_{-1}^1\\
+&= \left( \frac{1}{5} - \frac{1}{3} \right) - \left( \frac{-1}{5} - \frac{-1}{3} \right)\\
+&= \left( \frac{1}{5} - \frac{1}{3} \right) - \left( -\frac{1}{5} + \frac{1}{3} \right)\\
+&= \frac{1}{5} - \frac{1}{3} + \frac{1}{5} - \frac{1}{3}\\
+&= \frac{2}{5} - \frac{2}{3} = \frac{6 - 10}{15} = -\frac{4}{15}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 9.5:} Find $\int (2\sqrt{x} + \frac{3}{x^2}) \, dx$.
+
+Rewrite as: $\int (2x^{1/2} + 3x^{-2}) \, dx$
+
+\begin{align}
+\int (2x^{1/2} + 3x^{-2}) \, dx &= 2 \cdot \frac{x^{3/2}}{3/2} + 3 \cdot \frac{x^{-1}}{-1} + C\\
+&= \frac{4x^{3/2}}{3} - \frac{3}{x} + C\\
+&= \frac{4x\sqrt{x}}{3} - \frac{3}{x} + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 10 Solutions}
+
+\begin{solution}
+\textbf{Problem 10.1:} Evaluate $\int_{-1}^2 (2x^3 - x^2 + 3) \, dx$.
+
+\begin{align}
+\int_{-1}^2 (2x^3 - x^2 + 3) \, dx &= \left[ \frac{2x^4}{4} - \frac{x^3}{3} + 3x \right]_{-1}^2\\
+&= \left[ \frac{x^4}{2} - \frac{x^3}{3} + 3x \right]_{-1}^2\\
+&= \left( \frac{16}{2} - \frac{8}{3} + 6 \right) - \left( \frac{1}{2} - \frac{-1}{3} - 3 \right)\\
+&= \left( 8 - \frac{8}{3} + 6 \right) - \left( \frac{1}{2} + \frac{1}{3} - 3 \right)\\
+&= 14 - \frac{8}{3} - \frac{1}{2} - \frac{1}{3} + 3\\
+&= 17 - \frac{9}{3} - \frac{1}{2} = 17 - 3 - \frac{1}{2} = 14 - \frac{1}{2} = \frac{27}{2}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 10.2:} Find the average value of $f(x) = 4x - x^2$ on $[0, 4]$.
+
+\begin{align}
+\text{Average value} &= \frac{1}{4-0} \int_0^4 (4x - x^2) \, dx\\
+&= \frac{1}{4} \left[ 2x^2 - \frac{x^3}{3} \right]_0^4\\
+&= \frac{1}{4} \left( 32 - \frac{64}{3} \right)\\
+&= \frac{1}{4} \cdot \frac{96 - 64}{3} = \frac{32}{12} = \frac{8}{3}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 10.3:} A particle has velocity $v(t) = 6t - t^2$ m/s. Find the displacement from $t = 1$ to $t = 5$.
+
+\begin{align}
+\text{Displacement} &= \int_1^5 (6t - t^2) \, dt\\
+&= \left[ 3t^2 - \frac{t^3}{3} \right]_1^5\\
+&= \left( 75 - \frac{125}{3} \right) - \left( 3 - \frac{1}{3} \right)\\
+&= 75 - \frac{125}{3} - 3 + \frac{1}{3}\\
+&= 72 - \frac{124}{3} = \frac{216 - 124}{3} = \frac{92}{3} \text{ meters}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 10.4:} Evaluate $\int_0^{\pi} \sin x \, dx$.
+
+\begin{align}
+\int_0^{\pi} \sin x \, dx &= [-\cos x]_0^{\pi}\\
+&= -\cos(\pi) - (-\cos(0))\\
+&= -(-1) - (-1) = 1 + 1 = 2
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 10.5:} Find the area between $y = x^3 - x$ and the x-axis from $x = -1$ to $x = 1$.
+
+The function $x^3 - x = x(x^2 - 1) = x(x-1)(x+1)$ changes sign at $x = -1, 0, 1$.
+
+On $[-1, 0]$: $f(x) = x^3 - x \geq 0$ (positive)
+On $[0, 1]$: $f(x) = x^3 - x \leq 0$ (negative)
+
+\begin{align}
+\text{Area} &= \int_{-1}^0 (x^3 - x) \, dx + \int_0^1 |x^3 - x| \, dx\\
+&= \int_{-1}^0 (x^3 - x) \, dx + \int_0^1 -(x^3 - x) \, dx\\
+&= \int_{-1}^0 (x^3 - x) \, dx + \int_0^1 (x - x^3) \, dx
+\end{align}
+
+For the first integral:
+\begin{align}
+\int_{-1}^0 (x^3 - x) \, dx &= \left[ \frac{x^4}{4} - \frac{x^2}{2} \right]_{-1}^0\\
+&= 0 - \left( \frac{1}{4} - \frac{1}{2} \right) = 0 + \frac{1}{4} = \frac{1}{4}
+\end{align}
+
+For the second integral:
+\begin{align}
+\int_0^1 (x - x^3) \, dx &= \left[ \frac{x^2}{2} - \frac{x^4}{4} \right]_0^1\\
+&= \frac{1}{2} - \frac{1}{4} = \frac{1}{4}
+\end{align}
+
+Total area = $\frac{1}{4} + \frac{1}{4} = \frac{1}{2}$
+\end{solution}
+
+\section*{Chapter 11 Solutions}
+
+\begin{solution}
+\textbf{Problem 11.1:} Find $\int (2\sin x + 3\cos x - \sec^2 x) \, dx$.
+
+\begin{align}
+\int (2\sin x + 3\cos x - \sec^2 x) \, dx &= 2(-\cos x) + 3(\sin x) - (\tan x) + C\\
+&= -2\cos x + 3\sin x - \tan x + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 11.2:} Evaluate $\int \cos(4x - 1) \, dx$.
+
+Let $u = 4x - 1$, so $du = 4 \, dx$, which means $dx = \frac{1}{4} du$.
+
+\begin{align}
+\int \cos(4x - 1) \, dx &= \int \cos u \cdot \frac{1}{4} \, du\\
+&= \frac{1}{4} \sin u + C\\
+&= \frac{1}{4} \sin(4x - 1) + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 11.3:} Find $\int_0^{\pi} (1 + \cos x) \, dx$.
+
+\begin{align}
+\int_0^{\pi} (1 + \cos x) \, dx &= [x + \sin x]_0^{\pi}\\
+&= (\pi + \sin \pi) - (0 + \sin 0)\\
+&= (\pi + 0) - (0 + 0) = \pi
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 11.4:} Evaluate $\int 2x \sin(x^2 + 1) \, dx$.
+
+Let $u = x^2 + 1$, so $du = 2x \, dx$.
+
+\begin{align}
+\int 2x \sin(x^2 + 1) \, dx &= \int \sin u \, du\\
+&= -\cos u + C\\
+&= -\cos(x^2 + 1) + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 11.5:} Find $\int \sec(3x) \tan(3x) \, dx$.
+
+Let $u = 3x$, so $du = 3 \, dx$, which means $dx = \frac{1}{3} du$.
+
+\begin{align}
+\int \sec(3x) \tan(3x) \, dx &= \int \sec u \tan u \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int \sec u \tan u \, du\\
+&= \frac{1}{3} \sec u + C\\
+&= \frac{1}{3} \sec(3x) + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 12 Solutions}
+
+\begin{solution}
+\textbf{Problem 12.1:} Find $\int (4e^x - 3^x + 2e^{-x}) \, dx$.
+
+\begin{align}
+\int (4e^x - 3^x + 2e^{-x}) \, dx &= 4e^x - \frac{3^x}{\ln 3} + 2 \cdot \frac{e^{-x}}{-1} + C\\
+&= 4e^x - \frac{3^x}{\ln 3} - 2e^{-x} + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 12.2:} Evaluate $\int \frac{3x^2}{x^3 + 1} \, dx$.
+
+Notice that the derivative of $x^3 + 1$ is $3x^2$, so this is of the form $\int \frac{f'(x)}{f(x)} \, dx$.
+
+\begin{align}
+\int \frac{3x^2}{x^3 + 1} \, dx &= \ln|x^3 + 1| + C
+\end{align}
+
+Since $x^3 + 1$ can be negative (when $x < -1$), we keep the absolute value.
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 12.3:} Find $\int_1^e x \ln x \, dx$ using integration by parts.
+
+Let $u = \ln x$ and $dv = x \, dx$.
+Then $du = \frac{1}{x} dx$ and $v = \frac{x^2}{2}$.
+
+\begin{align}
+\int x \ln x \, dx &= uv - \int v \, du\\
+&= \ln x \cdot \frac{x^2}{2} - \int \frac{x^2}{2} \cdot \frac{1}{x} \, dx\\
+&= \frac{x^2 \ln x}{2} - \int \frac{x}{2} \, dx\\
+&= \frac{x^2 \ln x}{2} - \frac{x^2}{4} + C\\
+&= \frac{x^2}{4}(2\ln x - 1) + C
+\end{align}
+
+Now evaluate the definite integral:
+\begin{align}
+\int_1^e x \ln x \, dx &= \left[ \frac{x^2}{4}(2\ln x - 1) \right]_1^e\\
+&= \frac{e^2}{4}(2\ln e - 1) - \frac{1^2}{4}(2\ln 1 - 1)\\
+&= \frac{e^2}{4}(2 - 1) - \frac{1}{4}(0 - 1)\\
+&= \frac{e^2}{4} - \frac{1}{4}(-1)\\
+&= \frac{e^2}{4} + \frac{1}{4} = \frac{e^2 + 1}{4}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 12.4:} Evaluate $\int_0^{\ln 2} e^{2x} \, dx$.
+
+\begin{align}
+\int_0^{\ln 2} e^{2x} \, dx &= \left[ \frac{e^{2x}}{2} \right]_0^{\ln 2}\\
+&= \frac{e^{2\ln 2}}{2} - \frac{e^0}{2}\\
+&= \frac{e^{\ln 2^2}}{2} - \frac{1}{2}\\
+&= \frac{2^2}{2} - \frac{1}{2}\\
+&= \frac{4}{2} - \frac{1}{2} = 2 - \frac{1}{2} = \frac{3}{2}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 12.5:} Find $\int \frac{1}{x \ln x} \, dx$.
+
+Let $u = \ln x$, so $du = \frac{1}{x} dx$.
+
+\begin{align}
+\int \frac{1}{x \ln x} \, dx &= \int \frac{1}{\ln x} \cdot \frac{1}{x} \, dx\\
+&= \int \frac{1}{u} \, du\\
+&= \ln|u| + C\\
+&= \ln|\ln x| + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 13 Solutions}
+
+\begin{solution}
+\textbf{Problem 13.1:} Find $\int (2x - 1)^6 \, dx$.
+
+Let $u = 2x - 1$, so $du = 2 \, dx$, which means $dx = \frac{1}{2} du$.
+
+\begin{align}
+\int (2x - 1)^6 \, dx &= \int u^6 \cdot \frac{1}{2} \, du\\
+&= \frac{1}{2} \int u^6 \, du\\
+&= \frac{1}{2} \cdot \frac{u^7}{7} + C\\
+&= \frac{u^7}{14} + C\\
+&= \frac{(2x - 1)^7}{14} + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 13.2:} Evaluate $\int x^2 \sqrt{x^3 + 8} \, dx$.
+
+Let $u = x^3 + 8$, so $du = 3x^2 \, dx$, which means $x^2 \, dx = \frac{1}{3} du$.
+
+\begin{align}
+\int x^2 \sqrt{x^3 + 8} \, dx &= \int \sqrt{u} \cdot \frac{1}{3} \, du\\
+&= \frac{1}{3} \int u^{1/2} \, du\\
+&= \frac{1}{3} \cdot \frac{u^{3/2}}{3/2} + C\\
+&= \frac{1}{3} \cdot \frac{2u^{3/2}}{3} + C\\
+&= \frac{2u^{3/2}}{9} + C\\
+&= \frac{2(x^3 + 8)^{3/2}}{9} + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 13.3:} Find $\int_1^3 \frac{x}{x^2 + 1} \, dx$.
+
+Let $u = x^2 + 1$, so $du = 2x \, dx$, which means $x \, dx = \frac{1}{2} du$.
+
+Change limits: when $x = 1$, $u = 2$; when $x = 3$, $u = 10$.
+
+\begin{align}
+\int_1^3 \frac{x}{x^2 + 1} \, dx &= \int_2^{10} \frac{1}{u} \cdot \frac{1}{2} \, du\\
+&= \frac{1}{2} \int_2^{10} \frac{1}{u} \, du\\
+&= \frac{1}{2} [\ln u]_2^{10}\\
+&= \frac{1}{2}(\ln 10 - \ln 2)\\
+&= \frac{1}{2}\ln\left(\frac{10}{2}\right)\\
+&= \frac{1}{2}\ln 5
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 13.4:} Evaluate $\int (3x^2 + 6x)(x^3 + 3x^2 - 1)^4 \, dx$.
+
+Let $u = x^3 + 3x^2 - 1$, so $du = (3x^2 + 6x) \, dx$.
+
+\begin{align}
+\int (3x^2 + 6x)(x^3 + 3x^2 - 1)^4 \, dx &= \int u^4 \, du\\
+&= \frac{u^5}{5} + C\\
+&= \frac{(x^3 + 3x^2 - 1)^5}{5} + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 13.5:} Find $\int \frac{4x^3}{(x^4 - 5)^2} \, dx$.
+
+Let $u = x^4 - 5$, so $du = 4x^3 \, dx$.
+
+\begin{align}
+\int \frac{4x^3}{(x^4 - 5)^2} \, dx &= \int \frac{1}{u^2} \, du\\
+&= \int u^{-2} \, du\\
+&= \frac{u^{-1}}{-1} + C\\
+&= -\frac{1}{u} + C\\
+&= -\frac{1}{x^4 - 5} + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 14 Solutions}
+
+\begin{solution}
+\textbf{Problem 14.1:} Find $\int \sqrt{16 - x^2} \, dx$.
+
+This has the form $\sqrt{a^2 - x^2}$ with $a = 4$.
+
+Let $x = 4\sin\theta$, so $dx = 4\cos\theta \, d\theta$.
+Then $\sqrt{16 - x^2} = \sqrt{16 - 16\sin^2\theta} = 4\cos\theta$.
+
+\begin{align}
+\int \sqrt{16 - x^2} \, dx &= \int 4\cos\theta \cdot 4\cos\theta \, d\theta\\
+&= 16\int \cos^2\theta \, d\theta\\
+&= 16\int \frac{1 + \cos(2\theta)}{2} \, d\theta\\
+&= 8\int (1 + \cos(2\theta)) \, d\theta\\
+&= 8\left(\theta + \frac{\sin(2\theta)}{2}\right) + C\\
+&= 8\theta + 4\sin(2\theta) + C
+\end{align}
+
+Since $\sin(2\theta) = 2\sin\theta\cos\theta$ and from our substitution:
+- $\sin\theta = \frac{x}{4}$
+- $\cos\theta = \frac{\sqrt{16-x^2}}{4}$
+
+We get:
+\begin{align}
+\int \sqrt{16 - x^2} \, dx &= 8\arcsin\left(\frac{x}{4}\right) + 4 \cdot 2 \cdot \frac{x}{4} \cdot \frac{\sqrt{16-x^2}}{4} + C\\
+&= 8\arcsin\left(\frac{x}{4}\right) + \frac{x\sqrt{16-x^2}}{2} + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 14.2:} Evaluate $\int \frac{x^2}{\sqrt{x^2 + 9}} \, dx$.
+
+This has the form $\sqrt{x^2 + a^2}$ with $a = 3$.
+
+Let $x = 3\tan\theta$, so $dx = 3\sec^2\theta \, d\theta$.
+Then $x^2 = 9\tan^2\theta$ and $\sqrt{x^2 + 9} = 3\sec\theta$.
+
+\begin{align}
+\int \frac{x^2}{\sqrt{x^2 + 9}} \, dx &= \int \frac{9\tan^2\theta}{3\sec\theta} \cdot 3\sec^2\theta \, d\theta\\
+&= \int 9\tan^2\theta \sec\theta \, d\theta\\
+&= 9\int \tan^2\theta \sec\theta \, d\theta\\
+&= 9\int (\sec^2\theta - 1)\sec\theta \, d\theta\\
+&= 9\int (\sec^3\theta - \sec\theta) \, d\theta
+\end{align}
+
+Using integration formulas:
+$\int \sec^3\theta \, d\theta = \frac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|) + C_1$
+$\int \sec\theta \, d\theta = \ln|\sec\theta + \tan\theta| + C_2$
+
+\begin{align}
+&= 9\left[\frac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|) - \ln|\sec\theta + \tan\theta|\right] + C\\
+&= \frac{9}{2}\sec\theta\tan\theta - \frac{9}{2}\ln|\sec\theta + \tan\theta| + C
+\end{align}
+
+Converting back:
+- $\tan\theta = \frac{x}{3}$
+- $\sec\theta = \frac{\sqrt{x^2+9}}{3}$
+
+\begin{align}
+\int \frac{x^2}{\sqrt{x^2 + 9}} \, dx &= \frac{9}{2} \cdot \frac{\sqrt{x^2+9}}{3} \cdot \frac{x}{3} - \frac{9}{2}\ln\left|\frac{\sqrt{x^2+9}}{3} + \frac{x}{3}\right| + C\\
+&= \frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln\left|\frac{x + \sqrt{x^2+9}}{3}\right| + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 14.3:} Find $\int \frac{1}{x\sqrt{x^2 - 1}} \, dx$.
+
+This has the form $\sqrt{x^2 - a^2}$ with $a = 1$.
+
+Let $x = \sec\theta$, so $dx = \sec\theta\tan\theta \, d\theta$.
+Then $\sqrt{x^2 - 1} = \tan\theta$.
+
+\begin{align}
+\int \frac{1}{x\sqrt{x^2 - 1}} \, dx &= \int \frac{1}{\sec\theta \cdot \tan\theta} \cdot \sec\theta\tan\theta \, d\theta\\
+&= \int 1 \, d\theta\\
+&= \theta + C
+\end{align}
+
+Since $x = \sec\theta$, we have $\theta = \arcsec x$.
+
+Therefore: $\int \frac{1}{x\sqrt{x^2 - 1}} \, dx = \arcsec x + C$
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 14.4:} Evaluate $\int \frac{1}{\sqrt{x^2 + 4x + 13}} \, dx$.
+
+First, complete the square:
+\begin{align}
+x^2 + 4x + 13 &= (x^2 + 4x + 4) + 9 = (x + 2)^2 + 9
+\end{align}
+
+So: $\sqrt{x^2 + 4x + 13} = \sqrt{(x + 2)^2 + 9}$
+
+Let $u = x + 2$, so $du = dx$:
+\begin{align}
+\int \frac{1}{\sqrt{x^2 + 4x + 13}} \, dx &= \int \frac{1}{\sqrt{u^2 + 9}} \, du
+\end{align}
+
+This is the standard form with $a = 3$:
+\begin{align}
+\int \frac{1}{\sqrt{u^2 + 9}} \, du &= \ln|u + \sqrt{u^2 + 9}| + C\\
+&= \ln|(x + 2) + \sqrt{(x + 2)^2 + 9}| + C\\
+&= \ln|x + 2 + \sqrt{x^2 + 4x + 13}| + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 14.5:} Find $\int \frac{\sqrt{25 - x^2}}{x^2} \, dx$.
+
+This has the form $\sqrt{a^2 - x^2}$ with $a = 5$.
+
+Let $x = 5\sin\theta$, so $dx = 5\cos\theta \, d\theta$.
+Then $x^2 = 25\sin^2\theta$ and $\sqrt{25 - x^2} = 5\cos\theta$.
+
+\begin{align}
+\int \frac{\sqrt{25 - x^2}}{x^2} \, dx &= \int \frac{5\cos\theta}{25\sin^2\theta} \cdot 5\cos\theta \, d\theta\\
+&= \int \frac{25\cos^2\theta}{25\sin^2\theta} \, d\theta\\
+&= \int \cot^2\theta \, d\theta\\
+&= \int (\csc^2\theta - 1) \, d\theta\\
+&= -\cot\theta - \theta + C
+\end{align}
+
+From our substitution: $\sin\theta = \frac{x}{5}$, so:
+- $\cos\theta = \frac{\sqrt{25-x^2}}{5}$
+- $\cot\theta = \frac{\cos\theta}{\sin\theta} = \frac{\sqrt{25-x^2}}{x}$
+- $\theta = \arcsin\left(\frac{x}{5}\right)$
+
+Therefore:
+\begin{align}
+\int \frac{\sqrt{25 - x^2}}{x^2} \, dx &= -\frac{\sqrt{25-x^2}}{x} - \arcsin\left(\frac{x}{5}\right) + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 15 Solutions}
+
+\begin{solution}
+\textbf{Problem 15.1:} Find $\int x \cos x \, dx$.
+
+Using integration by parts with $u = x$ and $dv = \cos x \, dx$:
+\begin{align}
+u &= x \Rightarrow du = dx\\
+dv &= \cos x \, dx \Rightarrow v = \sin x
+\end{align}
+
+\begin{align}
+\int x \cos x \, dx &= uv - \int v \, du\\
+&= x \sin x - \int \sin x \, dx\\
+&= x \sin x - (-\cos x) + C\\
+&= x \sin x + \cos x + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 15.2:} Evaluate $\int x^2 e^x \, dx$.
+
+Using integration by parts with $u = x^2$ and $dv = e^x dx$:
+\begin{align}
+u &= x^2 \Rightarrow du = 2x \, dx\\
+dv &= e^x dx \Rightarrow v = e^x
+\end{align}
+
+\begin{align}
+\int x^2 e^x \, dx &= x^2 e^x - \int e^x \cdot 2x \, dx\\
+&= x^2 e^x - 2\int xe^x \, dx
+\end{align}
+
+For $\int xe^x \, dx$, use integration by parts again with $u = x$, $dv = e^x dx$:
+\begin{align}
+\int xe^x \, dx &= xe^x - \int e^x \, dx = xe^x - e^x + C_1
+\end{align}
+
+Therefore:
+\begin{align}
+\int x^2 e^x \, dx &= x^2 e^x - 2(xe^x - e^x) + C\\
+&= x^2 e^x - 2xe^x + 2e^x + C\\
+&= e^x(x^2 - 2x + 2) + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 15.3:} Find $\int x \ln x \, dx$.
+
+Using integration by parts with $u = \ln x$ and $dv = x \, dx$:
+\begin{align}
+u &= \ln x \Rightarrow du = \frac{1}{x} dx\\
+dv &= x \, dx \Rightarrow v = \frac{x^2}{2}
+\end{align}
+
+\begin{align}
+\int x \ln x \, dx &= \ln x \cdot \frac{x^2}{2} - \int \frac{x^2}{2} \cdot \frac{1}{x} \, dx\\
+&= \frac{x^2 \ln x}{2} - \int \frac{x}{2} \, dx\\
+&= \frac{x^2 \ln x}{2} - \frac{x^2}{4} + C\\
+&= \frac{x^2}{4}(2\ln x - 1) + C
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 15.4:} Evaluate $\int_0^{\pi/2} x \sin x \, dx$.
+
+Using integration by parts with $u = x$ and $dv = \sin x \, dx$:
+\begin{align}
+u &= x \Rightarrow du = dx\\
+dv &= \sin x \, dx \Rightarrow v = -\cos x
+\end{align}
+
+\begin{align}
+\int x \sin x \, dx &= x(-\cos x) - \int (-\cos x) \, dx\\
+&= -x\cos x + \int \cos x \, dx\\
+&= -x\cos x + \sin x + C
+\end{align}
+
+Now evaluate the definite integral:
+\begin{align}
+\int_0^{\pi/2} x \sin x \, dx &= [-x\cos x + \sin x]_0^{\pi/2}\\
+&= \left(-\frac{\pi}{2}\cos\frac{\pi}{2} + \sin\frac{\pi}{2}\right) - (-0\cos 0 + \sin 0)\\
+&= \left(-\frac{\pi}{2} \cdot 0 + 1\right) - (0 + 0)\\
+&= 1
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 15.5:} Find $\int e^{2x} \cos x \, dx$.
+
+This requires the cyclic integration technique. Let $I = \int e^{2x} \cos x \, dx$.
+
+Using integration by parts with $u = \cos x$ and $dv = e^{2x} dx$:
+\begin{align}
+u &= \cos x \Rightarrow du = -\sin x \, dx\\
+dv &= e^{2x} dx \Rightarrow v = \frac{e^{2x}}{2}
+\end{align}
+
+\begin{align}
+I &= \cos x \cdot \frac{e^{2x}}{2} - \int \frac{e^{2x}}{2} \cdot (-\sin x) \, dx\\
+&= \frac{e^{2x}\cos x}{2} + \frac{1}{2}\int e^{2x} \sin x \, dx
+\end{align}
+
+For $\int e^{2x} \sin x \, dx$, use integration by parts with $u = \sin x$, $dv = e^{2x} dx$:
+\begin{align}
+\int e^{2x} \sin x \, dx &= \sin x \cdot \frac{e^{2x}}{2} - \int \frac{e^{2x}}{2} \cdot \cos x \, dx\\
+&= \frac{e^{2x}\sin x}{2} - \frac{1}{2}\int e^{2x} \cos x \, dx\\
+&= \frac{e^{2x}\sin x}{2} - \frac{1}{2}I
+\end{align}
+
+Substituting back:
+\begin{align}
+I &= \frac{e^{2x}\cos x}{2} + \frac{1}{2}\left(\frac{e^{2x}\sin x}{2} - \frac{1}{2}I\right)\\
+&= \frac{e^{2x}\cos x}{2} + \frac{e^{2x}\sin x}{4} - \frac{1}{4}I
+\end{align}
+
+Solving for $I$:
+\begin{align}
+I + \frac{1}{4}I &= \frac{e^{2x}\cos x}{2} + \frac{e^{2x}\sin x}{4}\\
+\frac{5}{4}I &= \frac{e^{2x}}{4}(2\cos x + \sin x)\\
+I &= \frac{e^{2x}(2\cos x + \sin x)}{5} + C
+\end{align}
+\end{solution}
+
+\section*{Chapter 16 Solutions}
+
+\begin{solution}
+\textbf{Problem 16.1:} Evaluate $\iint_R xy \, dA$ where $R = [1,3] \times [0,2]$.
+
+\begin{align}
+\iint_R xy \, dA &= \int_0^2 \int_1^3 xy \, dx \, dy\\
+&= \int_0^2 \left[ \int_1^3 xy \, dx \right] dy\\
+&= \int_0^2 \left[ y \cdot \frac{x^2}{2} \right]_1^3 dy\\
+&= \int_0^2 \frac{y}{2}(9 - 1) \, dy\\
+&= \int_0^2 4y \, dy\\
+&= \left[ 2y^2 \right]_0^2 = 8
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 16.2:} Find the volume under $z = x + y$ over the region bounded by $x = 0$, $y = 0$, and $x + y = 2$.
+
+The region is: $0 \leq x \leq 2$ and $0 \leq y \leq 2 - x$.
+
+\begin{align}
+V &= \iint_D (x + y) \, dA = \int_0^2 \int_0^{2-x} (x + y) \, dy \, dx\\
+&= \int_0^2 \left[ xy + \frac{y^2}{2} \right]_0^{2-x} dx\\
+&= \int_0^2 \left[ x(2-x) + \frac{(2-x)^2}{2} \right] dx\\
+&= \int_0^2 \left[ 2x - x^2 + \frac{4 - 4x + x^2}{2} \right] dx\\
+&= \int_0^2 \left[ 2x - x^2 + 2 - 2x + \frac{x^2}{2} \right] dx\\
+&= \int_0^2 \left[ 2 - \frac{x^2}{2} \right] dx\\
+&= \left[ 2x - \frac{x^3}{6} \right]_0^2\\
+&= 4 - \frac{8}{6} = 4 - \frac{4}{3} = \frac{8}{3}
+\end{align}
+\end{solution}
+
+\begin{solution}
+\textbf{Problem 16.3:} Evaluate $\int_0^2 \int_{y/2}^1 e^{x^2} \, dx \, dy$ by changing the order of integration.
+
+The region is described by: $0 \leq y \leq 2$ and $\frac{y}{2} \leq x \leq 1$.
+
+To change order, we need: for what values of $x$ and $y$ are we integrating?
+- From $x = \frac{y}{2}$, we get $y = 2x$
+- $x$ ranges from $0$ to $1$ (from the
